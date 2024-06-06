@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/logo2.png</file>
+        <file>images/sign.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>images/icons/arrow.png</file>
+        <file>images/icons/attach.png</file>
+        <file>images/icons/back.png</file>
+        <file>images/icons/back2.png</file>
+        <file>images/icons/closedeye.png</file>
+        <file>images/icons/edit.png</file>
+        <file>images/icons/fmenu.png</file>
+        <file>images/icons/friday.png</file>
+        <file>images/icons/iconqwicky.png</file>
+        <file>images/icons/menu.png</file>
+        <file>images/icons/monday.png</file>
+        <file>images/icons/openeye.png</file>
+        <file>images/icons/order.png</file>
+        <file>images/icons/plus.png</file>
+        <file>images/icons/quit.png</file>
+        <file>images/icons/remove.png</file>
+        <file>images/icons/reservation.png</file>
+        <file>images/icons/saturday.png</file>
+        <file>images/icons/search.png</file>
+        <file>images/icons/settings.png</file>
+        <file>images/icons/sunday.png</file>
+        <file>images/icons/thursday.png</file>
+        <file>images/icons/tuesday.png</file>
+        <file>images/icons/wednesday.png</file>
+    </qresource>
+</RCC>

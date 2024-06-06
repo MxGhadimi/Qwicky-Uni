@@ -1,0 +1,1528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Additem</class>
+ <widget class="QWidget" name="Additem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>545</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>238</red>
+        <green>238</green>
+        <blue>241</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>238</red>
+        <green>238</green>
+        <blue>241</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>238</red>
+        <green>238</green>
+        <blue>241</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>238</red>
+        <green>238</green>
+        <blue>241</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>340</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: rgb(255, 255, 255);
+    border-radius: 17px;</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLineEdit" name="Name_LE">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+}
+
+QLineEdit:focus {
+    border-color: rgb(52, 81, 98);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Amount_LE">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>200</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+}
+
+QLineEdit:focus {
+    border-color: rgb(52, 81, 98);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Ingredients_L">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Ingredient</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Price_L_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>180</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Amount</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Additem_PB">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>480</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="128">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="128">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>137</green>
+          <blue>64</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="128">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: rgb(255, 137, 64);
+    border: none;
+    border-radius: 7px;
+	color: rgb(31, 48, 58);
+	font: 600 13pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: rgb(255, 215, 147);
+}
+QPushButton::pressed {
+    background-color: rgb(255, 85, 0);
+}</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Image_L">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>10</y>
+      <width>161</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Description_L">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>320</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Description</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Price_L">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>120</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Price</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Price_LE">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>140</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+}
+
+QLineEdit:focus {
+    border-color: rgb(52, 81, 98);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Addimage_PB">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>10</y>
+      <width>161</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: none;
+    border: none;
+    border-radius: 5px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	padding-left: 0.5px;
+	image: url(:/icons/images/icons/attach.png);
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+
+}
+
+QPushButton:hover {
+    background-color: rgb(232, 232, 232);
+}
+QPushButton::pressed {
+    background-color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Ingredients_LE">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+}
+
+QLineEdit:focus {
+    border-color: rgb(52, 81, 98);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Name_L">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Showingredies_TE">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>301</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QTextEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+	padding-right: 35px;
+}
+
+QScrollBar:vertical {
+    background: rgb(223, 229, 229); 
+    width: 4px;
+    border-radius: 2px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background:  rgb(255, 137, 64);
+    min-height: 3px;
+    border-radius: 2px;
+}
+
+QScrollBar::add-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollBar::sub-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Description_TE">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>340</y>
+      <width>301</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QTextEdit {
+	background-color: rgb(223, 229, 229);
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+	padding-right: 35px;
+}
+
+QScrollBar:vertical {
+    background: rgb(223, 229, 229); 
+    width: 4px;
+    border-radius: 2px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background:  rgb(255, 137, 64);
+    min-height: 3px;
+    border-radius: 2px;
+}
+
+QScrollBar::add-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollBar::sub-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteamount_PB">
+    <property name="geometry">
+     <rect>
+      <x>291</x>
+      <y>244</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>31</red>
+          <green>48</green>
+          <blue>58</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>15</red>
+          <green>24</green>
+          <blue>29</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>6</red>
+          <green>106</green>
+          <blue>110</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: rgb(6, 106, 110);
+    border: none;
+    border-radius: 5px;
+	padding-bottom: 5px;
+	padding-left: 0.5px;
+	padding-top: 5px;
+	padding-right: 1px;
+	image: url(:/icons/images/icons/remove.png);
+	font: 600 15pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: rgb(7, 132, 136);
+}
+QPushButton::pressed {
+    background-color: rgb(5, 97, 100);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Saturday_CB">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/saturday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Sunday_CB">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/sunday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Availability_L">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>420</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Availability </string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Thursday_CB">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/thursday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Friday_CB">
+    <property name="geometry">
+     <rect>
+      <x>175</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/friday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Wednesday_CB">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/wednesday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Monday_CB">
+    <property name="geometry">
+     <rect>
+      <x>75</x>
+      <y>440</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/monday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Tuesday_CB">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>440</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator {
+	image: url(&quot;:/icons/images/icons/tuesday.png&quot;);
+    width: 26px;
+    height: 25px;
+	padding-right: -2px;
+	padding-left: -3px;
+	padding-top: -3px;
+	padding-bottom: -0.5px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: none;
+}
+
+QCheckBox::indicator:checked {
+	border: none;;
+	background-color:  rgb(6, 106, 110);
+	border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Category_L">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>420</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(31, 48, 58);
+font: 600 10pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Category</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="Category_C">
+    <property name="geometry">
+     <rect>
+      <x>214</x>
+      <y>442</y>
+      <width>112</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>112</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    border: 1px solid white;
+    border-radius: 5px;
+    min-width: 6em;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+	color : white;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: rgb(238, 238, 238);
+	background-color: rgb(255, 137, 64);
+    border-left-style: solid;
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+    width: 15px;
+    height: 15px;
+	image: url(:/icons/images/icons/arrow.png);
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid white;
+    border-radius: 5px 5px 8px 8px;
+    background-color:  rgb(6, 106, 110);
+    selection-background-color: white;
+    selection-color: white;
+    padding: 5px;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 4px;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    border: none;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: rgb(255, 137, 64);
+	border-radius: 5px 5px 8px 8px;
+    color: rgb(31, 48, 58);
+}</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Food</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Drink</string>
+     </property>
+    </item>
+   </widget>
+   <zorder>Name_LE</zorder>
+   <zorder>Amount_LE</zorder>
+   <zorder>Ingredients_L</zorder>
+   <zorder>Price_L_2</zorder>
+   <zorder>Additem_PB</zorder>
+   <zorder>Image_L</zorder>
+   <zorder>Description_L</zorder>
+   <zorder>Price_L</zorder>
+   <zorder>Price_LE</zorder>
+   <zorder>Addimage_PB</zorder>
+   <zorder>Ingredients_LE</zorder>
+   <zorder>Name_L</zorder>
+   <zorder>Showingredies_TE</zorder>
+   <zorder>Description_TE</zorder>
+   <zorder>deleteamount_PB</zorder>
+   <zorder>Availability_L</zorder>
+   <zorder>Category_L</zorder>
+   <zorder>Category_C</zorder>
+   <zorder>Saturday_CB</zorder>
+   <zorder>Sunday_CB</zorder>
+   <zorder>Monday_CB</zorder>
+   <zorder>Tuesday_CB</zorder>
+   <zorder>Wednesday_CB</zorder>
+   <zorder>Thursday_CB</zorder>
+   <zorder>Friday_CB</zorder>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>Additem_PB</tabstop>
+  <tabstop>Amount_LE</tabstop>
+  <tabstop>Name_LE</tabstop>
+  <tabstop>Price_LE</tabstop>
+  <tabstop>Addimage_PB</tabstop>
+  <tabstop>Ingredients_LE</tabstop>
+  <tabstop>Showingredies_TE</tabstop>
+  <tabstop>Description_TE</tabstop>
+  <tabstop>deleteamount_PB</tabstop>
+  <tabstop>Saturday_CB</tabstop>
+  <tabstop>Sunday_CB</tabstop>
+  <tabstop>Thursday_CB</tabstop>
+  <tabstop>Friday_CB</tabstop>
+  <tabstop>Wednesday_CB</tabstop>
+  <tabstop>Monday_CB</tabstop>
+  <tabstop>Tuesday_CB</tabstop>
+  <tabstop>Category_C</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
