@@ -507,7 +507,7 @@ padding-bottom: 3px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QCheckBox::indicator {
-	image: url(&quot;:/icons/icons/saturday.png&quot;);
+	image: url(&quot;:/icons/images/icons/friday.png&quot;);
     width: 26px;
     height: 25px;
 	padding-right: -2px;
@@ -668,8 +668,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <widget class="QPushButton" name="Editimage_PB">
     <property name="geometry">
      <rect>
-      <x>205</x>
-      <y>25</y>
+      <x>203</x>
+      <y>24</y>
       <width>24</width>
       <height>24</height>
      </rect>
@@ -1065,7 +1065,6 @@ QComboBox QAbstractItemView::item:selected {
    <zorder>Monday_CB</zorder>
    <zorder>Tuesday_CB</zorder>
    <zorder>Wednesday_CB</zorder>
-   <zorder>Friday_CB</zorder>
    <zorder>Name_TE</zorder>
    <zorder>Price_TE</zorder>
    <zorder>Category_TE</zorder>
@@ -1076,6 +1075,7 @@ QComboBox QAbstractItemView::item:selected {
    <zorder>Edit_PB</zorder>
    <zorder>Category_C</zorder>
    <zorder>Thursday_CB</zorder>
+   <zorder>Friday_CB</zorder>
   </widget>
  </widget>
  <tabstops>

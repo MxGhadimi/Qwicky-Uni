@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     QIcon icon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/iconqwicky.png");
     QApplication::setWindowIcon(icon);
     QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "Login/Signup");
-    QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admins.db";
-    database.setDatabaseName("E:/Projects/Q/Qwicky/data/admins.db");
+    QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admin.db";
+    database.setDatabaseName(dbpath);
     if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
 
     ui->Password_LE->setEchoMode(QLineEdit::Password);
@@ -38,10 +38,12 @@ void MainWindow::checkLoginFile() {
         QString user_type = in.readLine();
 
         if (user_type == "admin") {
+            closeDatabaseConnection();
             hide();
             emit showAdminDashboardPage();
         }
         else if (user_type == "customer") {
+            closeDatabaseConnection();
             hide();
             emit showCustomerDashboardPage();
         }
@@ -52,7 +54,7 @@ void MainWindow::on_Login_PB_clicked() {
     QString username = ui->Username_LE->text();
     QString password = ui->Password_LE->text();
 
-    QSqlQuery q;
+    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
     QString query = "SELECT 'admin' as user_type FROM Admins WHERE username = :username AND password = :password UNION SELECT 'customer' as user_type FROM Customers WHERE username = :username AND password = :password";
     if (!q.prepare(query)) qDebug() << "Error preparing query: " << q.lastError().text();
     q.bindValue(":username", username);
@@ -74,10 +76,12 @@ void MainWindow::on_Login_PB_clicked() {
         }
 
         if (user_type == "admin") {
+            closeDatabaseConnection();
             hide();
             emit showAdminDashboardPage();
         }
         else if (user_type == "customer") {
+            closeDatabaseConnection();
             hide();
             emit showCustomerDashboardPage();
         }
@@ -172,7 +176,7 @@ void MainWindow::on_SignUp2_PB_clicked() {
 }
 
 bool MainWindow::insertData(const QString& name, const QString& lastName, const QString& phoneNumber, const QString& address, const QString& username, const QString& password) {
-    QSqlQuery q;
+    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
     q.prepare("INSERT INTO Customers (first_name, last_name, phone_number, address, username, password) VALUES (:name, :lastname, :phonenumber, :address, :username, :password)");
     q.bindValue(":name", name);
     q.bindValue(":lastname", lastName);
@@ -189,7 +193,7 @@ void MainWindow::on_Login2_PB_clicked() {
     QString username = ui->Username2_LE->text();
     QString password = ui->Password2_LE->text();
 
-    QSqlQuery q;
+    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
     q.prepare("SELECT 'admin' as user_type FROM Admins WHERE username = :username AND password = :password UNION SELECT 'customer' as user_type FROM Customers WHERE username = :username AND password = :password");
     q.bindValue(":username", username);
     q.bindValue(":password", password);
@@ -198,10 +202,12 @@ void MainWindow::on_Login2_PB_clicked() {
     if (q.next()) {
         QString user_type = q.value(0).toString();
         if (user_type == "admin") {
+            closeDatabaseConnection();
             emit showAdminDashboardPage();
             this->hide();
         }
         else if (user_type == "customer") {
+            closeDatabaseConnection();
             emit showCustomerDashboardPage();
             this->hide();
         }
@@ -270,5 +276,13 @@ void MainWindow::checkPasswordStrength (const QString &password) {
 
 void MainWindow::on_Back_PB_clicked() {
     ui -> stackedWidget -> setCurrentWidget(ui->Login_QW);
+}
+
+void MainWindow::closeDatabaseConnection() {
+    QSqlDatabase database = QSqlDatabase::database("Login/Signup");
+    if (database.isOpen()) {
+        database.close();
+        qDebug() << "Database(Login/Signup) connection closed.";
+    }
 }
 

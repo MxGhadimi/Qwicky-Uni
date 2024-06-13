@@ -3,6 +3,7 @@
 #include "admindashboard.h"
 #include "additem.h"
 #include "showitem.h"
+#include "addorder.h"
 
 #include <QApplication>
 #include <QFontDatabase>
@@ -23,6 +24,8 @@ int main(int argc, char *argv[]) {
     AdminDashboard admindashboard;
     Additem additem;
     Showitem showitem;
+    Addorder addorder;
+
 
     //QObject::connect(&mainWindow, &MainWindow::showSignUpPage, &signup, &Signup::show);
     //QObject::connect(&signup, &Signup::showMainWindowPage, &mainWindow, &MainWindow::show);
@@ -31,6 +34,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(&admindashboard, &AdminDashboard::showAdditemPage, &additem, &Additem::show);
     QObject::connect(&additem, &Additem::itemInserted, &admindashboard, &AdminDashboard::showMenu);
     QObject::connect(&showitem, &Showitem::updatedItem, &admindashboard, &AdminDashboard::showMenu);
+    QObject::connect(&admindashboard, &AdminDashboard::showAddorderPage, &addorder, &Addorder::show);
 
     mainWindow.show();
     return a.exec();

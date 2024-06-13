@@ -9,16 +9,16 @@ AdminDashboard::AdminDashboard(QWidget *parent)
     setWindowTitle("Qwicky");
     ui -> stackedWidget -> setCurrentWidget(ui->Dashboard_QW);
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "admin");
+    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "admin-items");
     QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/items.db";
     database.setDatabaseName(dbpath);
     if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
 }
 
 AdminDashboard::~AdminDashboard() {
-    QSqlDatabase database = QSqlDatabase::database("admin");
+    QSqlDatabase database = QSqlDatabase::database("admin-items");
     if (database.isOpen()) database.close();
-    QSqlDatabase::removeDatabase("admin");
+    QSqlDatabase::removeDatabase("admin-items");
     delete ui;
 }
 
@@ -34,7 +34,6 @@ void AdminDashboard::on_Dashboard_PB_clicked() {
     ui->Orders_PB->setStyleSheet(defaultstyle);
     ui->Settings_PB->setStyleSheet(defaultstyle);
 }
-
 
 void AdminDashboard::on_Menu_PB_clicked() {
     const QString defaultstyle = "QPushButton {font: 700 12pt \"Segoe UI\";color: rgb(31, 48, 58);text-align: left;padding: 10px 20px;background-color: none;} QPushButton:hover {background-color: rgb(255, 215, 147);} QPushButton:pressed {background-color: orange;}";
@@ -52,7 +51,6 @@ void AdminDashboard::on_Menu_PB_clicked() {
     ui->Search_LE->setPlaceholderText("Search for an item...");
 }
 
-
 void AdminDashboard::on_Reservations_PB_clicked() {
     const QString defaultstyle = "QPushButton {font: 700 12pt \"Segoe UI\";color: rgb(31, 48, 58);text-align: left;padding: 10px 20px;background-color: none;} QPushButton:hover {background-color: rgb(255, 215, 147);} QPushButton:pressed {background-color: orange;}";
     const QString clickedstyle = "QPushButton {font: 700 11pt \"Segoe UI\";color: rgb(31, 48, 58);text-align: left;padding: 10px 20px;background-color: rgb(255, 137, 64);}";
@@ -65,7 +63,6 @@ void AdminDashboard::on_Reservations_PB_clicked() {
     ui->Orders_PB->setStyleSheet(defaultstyle);
     ui->Settings_PB->setStyleSheet(defaultstyle);
 }
-
 
 void AdminDashboard::on_Orders_PB_clicked() {
     const QString defaultstyle = "QPushButton {font: 700 12pt \"Segoe UI\";color: rgb(31, 48, 58);text-align: left;padding: 10px 20px;background-color: none;} QPushButton:hover {background-color: rgb(255, 215, 147);} QPushButton:pressed {background-color: orange;}";
@@ -112,7 +109,7 @@ void AdminDashboard::on_Additem_PB_clicked() {
 }
 
 void AdminDashboard::showMenu() {
-    QSqlQuery q;
+    QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT * FROM Items");
     if (!q.exec()) qDebug() << "Error executing query";
 
@@ -124,7 +121,7 @@ void AdminDashboard::showMenu() {
     while(q.next()) {
         int item_id = q.value("item_id").toInt();
         Item *item = new Item(this);
-        item->getData(item_id);
+        item->readData(item_id);
         item->showData();
         item->setMinimumSize(250, 290);
         item->setMaximumSize(250, 290);
@@ -142,11 +139,10 @@ void AdminDashboard::showMenu() {
 
     ui->gridLayout->addWidget(ui->scrollArea);
     connect(ui->scrollArea, &QScrollArea::destroyed, scrollWidget, &QObject::deleteLater);
-
 }
 
 void AdminDashboard::on_Search_LE_textChanged(const QString &arg1) {
-    QSqlQuery q;
+    QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT * FROM Items WHERE name LIKE :search OR description LIKE :search");
     q.bindValue(":search", "%" + arg1 + "%");
     if (!q.exec()) qDebug() << "Error executing query";
@@ -159,7 +155,7 @@ void AdminDashboard::on_Search_LE_textChanged(const QString &arg1) {
     while(q.next()) {
         int item_id = q.value("item_id").toInt();
         Item *item = new Item(this);
-        item->getData(item_id);
+        item->readData(item_id);
         item->showData();
         item->setMinimumSize(250, 290);
         item->setMaximumSize(250, 290);
@@ -177,5 +173,9 @@ void AdminDashboard::on_Search_LE_textChanged(const QString &arg1) {
 
     ui->gridLayout->addWidget(ui->scrollArea);
     connect(ui->scrollArea, &QScrollArea::destroyed, scrollWidget, &QObject::deleteLater);
+}
+
+void AdminDashboard::on_Neworder_PB_clicked() {
+    emit showAddorderPage();
 }
 

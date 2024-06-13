@@ -9,9 +9,16 @@ set(PROJECT_SOURCES
     src/widgets/item.cpp
     src/widgets/showitem.cpp
     src/widgets/ingredient.cpp
+    src/widgets/addorder.cpp
+    src/widgets/customer.cpp
+    src/widgets/showselected.cpp
+    src/widgets/order.cpp
+
 
     src/utils/Ceasor.cpp
+)
 
+set(PROJECT_HEADERS
     src/include/mainwindow.h
     src/include/customerdashboard.h
     src/include/admindashboard.h
@@ -20,4 +27,8 @@ set(PROJECT_SOURCES
     src/include/item.h
     src/include/showitem.h
     src/include/ingredient.h
+    src/include/addorder.h
+    src/include/customer.h
+    src/include/showselected.h
+    src/include/order.h
 )

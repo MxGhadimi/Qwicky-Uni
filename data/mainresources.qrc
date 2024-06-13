@@ -28,5 +28,7 @@
         <file>images/icons/thursday.png</file>
         <file>images/icons/tuesday.png</file>
         <file>images/icons/wednesday.png</file>
+        <file>images/icons/forward.png</file>
+        <file>images/icons/backward.png</file>
     </qresource>
 </RCC>

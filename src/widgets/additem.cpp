@@ -66,7 +66,7 @@ void Additem::on_Additem_PB_clicked() {
     q.exec("SELECT MAX(item_id) FROM Items");
     if (q.next()) {
         item_id = q.value(0).toInt();
-        item->setData(image_data, name, description, price, days, category, item_id);
+        item->writeData(image_data, name, description, price, days, category, item_id);
         ingredient->setData(all_ingredients, item_id);
         emit itemInserted();
         clearUI();

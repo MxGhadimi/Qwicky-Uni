@@ -44,6 +44,7 @@ private slots:
 
     void on_Back_PB_clicked();
     bool insertData(const QString& name, const QString& lastName, const QString& phoneNumber, const QString& address, const QString& username, const QString& password);
+    void closeDatabaseConnection();
 
 signals:
     //void showSignUpPage();

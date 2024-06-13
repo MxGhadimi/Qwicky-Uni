@@ -179,11 +179,101 @@ text-align: left;</string>
      <string>Name</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="Removeamount_PB">
+    <property name="geometry">
+     <rect>
+      <x>161</x>
+      <y>250</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: rgb(190, 190, 190);
+    border: none;
+    border-radius: 12px;
+	padding-bottom: 5px;
+	padding-left: 0.5px;
+	padding-top: 5px;
+	padding-right: 1px;
+	image: url(:/icons/images/icons/remove.png);
+	font: 600 15pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: rgb(7, 132, 136);
+}
+QPushButton::pressed {
+    background-color: rgb(5, 97, 100);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Addamount_PB">
+    <property name="geometry">
+     <rect>
+      <x>209</x>
+      <y>250</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: rgb(6, 106, 110);
+    border: none;
+    border-radius: 12px;
+	padding-bottom: 5px;
+	padding-left: 0.5px;
+	padding-top: 5px;
+	padding-right: 1px;
+	image: url(:/icons/images/icons/plus.png);
+	font: 600 15pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover {
+    background-color: rgb(7, 132, 136);
+}
+QPushButton::pressed {
+    background-color: rgb(5, 97, 100);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Amount_L">
+    <property name="geometry">
+     <rect>
+      <x>183</x>
+      <y>245</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	background: white;
+	color: rgb(31, 48, 58);
+	font: 600 15pt &quot;Segoe UI&quot;;
+}</string>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>treeView</zorder>
    <zorder>Price_L</zorder>
    <zorder>Image_L</zorder>
    <zorder>Description_TE</zorder>
    <zorder>Name_PB</zorder>
+   <zorder>Amount_L</zorder>
+   <zorder>Addamount_PB</zorder>
+   <zorder>Removeamount_PB</zorder>
   </widget>
  </widget>
  <resources/>

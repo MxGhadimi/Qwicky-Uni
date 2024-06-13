@@ -96,7 +96,7 @@ border: none;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
+      <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -183,7 +183,7 @@ QPushButton:pressed {
           <string>  Dashboard</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/menu.png</normaloff>:/icons/images/icons/menu.png</iconset>
          </property>
          <property name="iconSize">
@@ -249,7 +249,7 @@ QPushButton:pressed {
           <string>  Menu</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/fmenu.png</normaloff>:/icons/images/icons/fmenu.png</iconset>
          </property>
          <property name="iconSize">
@@ -315,7 +315,7 @@ QPushButton:pressed {
           <string>  Reservations</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/reservation.png</normaloff>:/icons/images/icons/reservation.png</iconset>
          </property>
          <property name="iconSize">
@@ -381,7 +381,7 @@ QPushButton:pressed {
           <string>  Orders</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/order.png</normaloff>:/icons/images/icons/order.png</iconset>
          </property>
          <property name="iconSize">
@@ -447,7 +447,7 @@ QPushButton:pressed {
           <string>  Tables</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/order.png</normaloff>:/icons/images/icons/order.png</iconset>
          </property>
          <property name="iconSize">
@@ -537,7 +537,7 @@ QPushButton:pressed {
           <string>Settings</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/settings.png</normaloff>:/icons/images/icons/settings.png</iconset>
          </property>
          <property name="iconSize">
@@ -615,7 +615,7 @@ QPushButton:pressed {
           <string>Log Out</string>
          </property>
          <property name="icon">
-          <iconset resource="data/mainresources.qrc">
+          <iconset resource="../data/mainresources.qrc">
            <normaloff>:/icons/images/icons/quit.png</normaloff>:/icons/images/icons/quit.png</iconset>
          </property>
          <property name="iconSize">
@@ -792,7 +792,7 @@ QPushButton::pressed {
 }</string>
       </property>
       <property name="text">
-       <string>+ Create New Order</string>
+       <string>+ Add New Order</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="widget1_GB">
@@ -1342,7 +1342,7 @@ QLineEdit:focus {
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="data/mainresources.qrc">:/icons/images/icons/search.png</pixmap>
+       <pixmap resource="../data/mainresources.qrc">:/icons/images/icons/search.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -1391,7 +1391,7 @@ color: rgb(255, 0, 4);</string>
   </widget>
  </widget>
  <resources>
-  <include location="data/mainresources.qrc"/>
+  <include location="../data/mainresources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -35,6 +35,7 @@ public slots:
 
 signals:
     void showAdditemPage();
+    void showAddorderPage();
 
 private slots:
     void on_Dashboard_PB_clicked();
@@ -48,6 +49,8 @@ private slots:
     void on_Additem_PB_clicked();
 
     void on_Search_LE_textChanged(const QString &arg1);
+
+    void on_Neworder_PB_clicked();
 
 private:
     Ui::AdminDashboard *ui;

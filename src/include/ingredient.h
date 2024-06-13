@@ -14,6 +14,7 @@
 #include <QCheckBox>
 #include <QMainWindow>
 #include <QFileDialog>
+#include "item.h"
 
 namespace Ui {
 class Ingredient;

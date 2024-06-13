@@ -467,7 +467,7 @@ font: 600 10pt &quot;Segoe UI&quot;;</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
+         <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -641,7 +641,7 @@ background: none;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="data/mainresources.qrc">:/new/prefix1/images/sign.png</pixmap>
+        <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/sign.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -806,7 +806,7 @@ font: 600 10pt &quot;Segoe UI&quot;;</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
+         <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -845,7 +845,7 @@ font: 600 13pt &quot;Segoe UI&quot;;</string>
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="data/mainresources.qrc">
+         <iconset resource="../data/mainresources.qrc">
           <normaloff>:/icons/images/icons/openeye.png</normaloff>:/icons/images/icons/openeye.png</iconset>
         </property>
         <property name="iconSize">
@@ -1419,7 +1419,7 @@ background: none;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="data/mainresources.qrc">:/new/prefix1/images/sign.png</pixmap>
+        <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/sign.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -1448,7 +1448,7 @@ QPushButton::pressed {
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="data/mainresources.qrc">
+        <iconset resource="../data/mainresources.qrc">
          <normaloff>:/icons/images/icons/back.png</normaloff>:/icons/images/icons/back.png</iconset>
        </property>
        <property name="iconSize">
@@ -1465,7 +1465,7 @@ QPushButton::pressed {
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="data/mainresources.qrc"/>
+  <include location="../data/mainresources.qrc"/>
  </resources>
  <connections/>
 </ui>

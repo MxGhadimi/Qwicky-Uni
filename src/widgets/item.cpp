@@ -9,6 +9,12 @@ Item::Item(QWidget *parent)
     ui->setupUi(this);
     ui->Description_TE->setReadOnly(true);
     ui->Description_TE->setContextMenuPolicy(Qt::NoContextMenu);
+
+    ui->Amount_L->hide();
+    ui->Addamount_PB->hide();
+    ui->Removeamount_PB->hide();
+    ui->Amount_L->setEnabled(false);
+    amount = 0;
 }
 
 Item::~Item()
@@ -16,8 +22,9 @@ Item::~Item()
     delete ui;
 }
 
-void Item::setData(QByteArray input_image, QString input_name, QString input_description, QString input_price, QString input_days, QString input_category, int input_item_id) {
+void Item::writeData(QByteArray input_image, const QString &input_name, const QString &input_description, const QString &input_price, const QString &input_days, const QString &input_category, int input_item_id) {
     item_id = input_item_id;
+    Check_CB->setProperty("item_id", item_id);
     QSqlQuery q;
     q.prepare("INSERT INTO Items (image, name, description, price, days, category) VALUES (:image, :name, :description, :price, :days, :category)");
     q.bindValue(":image", input_image);
@@ -26,11 +33,11 @@ void Item::setData(QByteArray input_image, QString input_name, QString input_des
     q.bindValue(":price", input_price.trimmed());
     q.bindValue(":days", input_days);
     q.bindValue(":category", input_category);
-    if (!q.exec()) qDebug() << "Failed to insert Food: " << q.lastError().text();
+    if (!q.exec()) qDebug() << "Failed to insert item: " << q.lastError().text();
 }
 
 
-void Item::getData(int input_item_id) {
+void Item::readData(int input_item_id) {
     item_id = input_item_id;
     QSqlQuery q;
     q.prepare("SELECT * FROM Items WHERE item_id = :item_id");
@@ -63,7 +70,7 @@ void Item::on_Name_PB_clicked() {
     showitem->show();
 }
 
-void Item::updateName(QString input_name, int item_id) {
+void Item::updateName(const QString &input_name, int item_id) {
     QSqlQuery q;
     q.prepare("UPDATE Items SET name = :name WHERE item_id = :item_id");
     q.bindValue(":name", input_name);
@@ -71,7 +78,7 @@ void Item::updateName(QString input_name, int item_id) {
     if (!q.exec()) qDebug() << "Failed to update";
 }
 
-void Item::updateDays(QString input_days, int item_id) {
+void Item::updateDays(const QString &input_days, int item_id) {
     QSqlQuery q;
     q.prepare("UPDATE Items SET days = :days WHERE item_id = :item_id");
     q.bindValue(":days", input_days);
@@ -79,7 +86,7 @@ void Item::updateDays(QString input_days, int item_id) {
     if (!q.exec()) qDebug() << "Failed to update";
 }
 
-void Item::updatePrice(QString input_price, int item_id) {
+void Item::updatePrice(const QString &input_price, int item_id) {
     QSqlQuery q;
     q.prepare("UPDATE Items SET price = :price WHERE item_id = :item_id");
     q.bindValue(":price", input_price);
@@ -87,7 +94,7 @@ void Item::updatePrice(QString input_price, int item_id) {
     if (!q.exec()) qDebug() << "Failed to update";
 }
 
-void Item::updateDescription(QString input_Description, int item_id) {
+void Item::updateDescription(const QString &input_Description, int item_id) {
     QSqlQuery q;
     q.prepare("UPDATE Items SET description = :description WHERE item_id = :item_id");
     q.bindValue(":description", input_Description);
@@ -95,10 +102,32 @@ void Item::updateDescription(QString input_Description, int item_id) {
     if (!q.exec()) qDebug() << "Failed to update";
 }
 
-void Item::updateCategory(QString input_category, int item_id) {
+void Item::updateCategory(const QString &input_category, int item_id) {
     QSqlQuery q;
     q.prepare("UPDATE Items SET category = :category WHERE item_id = :item_id");
     q.bindValue(":category", input_category);
     q.bindValue(":item_id", item_id);
     if (!q.exec()) qDebug() << "Failed to update";
+}
+
+void Item::showAmount() {
+    ui->Amount_L->show();
+    ui->Addamount_PB->show();
+    ui->Removeamount_PB->show();
+}
+
+void Item::setAmountText(const QString &text) {
+    ui->Amount_L->setText(text);
+}
+
+void Item::on_Addamount_PB_clicked() {
+    ui->Amount_L->setText(QString::number(++amount));
+    emit amountChanged(item_id, amount);
+}
+
+
+void Item::on_Removeamount_PB_clicked() {
+    if (0 == amount) return;
+    else ui->Amount_L->setText(QString::number(--amount));
+    emit amountChanged(item_id, amount);
 }
