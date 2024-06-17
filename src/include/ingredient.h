@@ -27,9 +27,9 @@ class Ingredient : public QWidget
 public:
     explicit Ingredient(QWidget *parent = nullptr);
     ~Ingredient();
-    void setData(QString input_ingredients, int input_item_id);
+    void setData(const QString &input_ingredients, int input_item_id);
     void getData(int input_item_id);
-    void updateIngredient(QString input_ingredients, int input_item_id);
+    void updateIngredient(const QString &input_ingredients, int input_item_id);
 
 
 private:

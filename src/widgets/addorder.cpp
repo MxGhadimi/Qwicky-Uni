@@ -11,8 +11,8 @@ Addorder::Addorder(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("Add Order");
-    this->setFixedHeight(435);
-    this->setFixedWidth(320);
+    setFixedHeight(435);
+    setFixedWidth(320);
 
     QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "addorder");
     QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admin.db";
@@ -24,7 +24,7 @@ Addorder::Addorder(QWidget *parent)
     ui->Guestnumber_LE->setEnabled(false);
     ui->Table_LE->setEnabled(false);
 
-    // for preventing memory leak
+    // to prevent memory leak
     scrollWidget = new QWidget(this);
     gridLayout = new QGridLayout(scrollWidget);
     gridLayout->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -56,7 +56,7 @@ void Addorder::on_Choosetable_PB_clicked() {
     ui->stackedWidget->setCurrentWidget(ui->Tables_QW);
     static QRegularExpression number("\\d+");
     QRegularExpressionMatch match = number.match(ui->Guestnumber_LE->text());
-    QSqlQuery q(QSqlDatabase::database("addorder"));
+    QSqlQuery q(QSqlDatabase::database("admin-items"));
     if (match.hasMatch()) {
         int capacity = match.captured(0).toInt();
         q.prepare("SELECT * FROM Tables WHERE capacity = ?");
@@ -108,7 +108,7 @@ void Addorder::on_Takeaway_RB_clicked() {
 void Addorder::on_Dinein_RB_clicked() {
     ui->Info_L->show();
     ui->Continueorder_PB->move(50, 380);
-    this->setFixedHeight(435);
+    setFixedHeight(435);
     ui->Guestnumber_L->show();
     ui->Guestnumber_LE->show();
     ui->Addperson_PB->show();
@@ -153,8 +153,8 @@ void Addorder::on_Continueorder_PB_clicked() {
     if (-1 == customer_id) QMessageBox::critical(this, "UserInfo", "no user with this information was found.");
     else {
         ui->stackedWidget->setCurrentWidget(ui->Items_QW);
-        this->setFixedHeight(650);
-        this->setFixedWidth(1104);
+        setFixedHeight(650);
+        setFixedWidth(1104);
         showItems();
     }
 }
@@ -197,6 +197,7 @@ void Addorder::on_Search_LE_2_textChanged(const QString &arg1) {
         delete item->widget();
         delete item;
     }
+
     QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT * FROM Items WHERE name LIKE :search OR description LIKE :search");
     q.bindValue(":search", "%" + arg1 + "%");
@@ -265,6 +266,35 @@ void Addorder::on_Additems_PB_clicked() {
     if (!selected_items_str.isEmpty()) {
         selected_items_str.chop(2);
     }
-    Order *order;
+
+    Order *order = new Order(this);
     order->writeData(customer_id, ui->Table_LE->text(), order_type, selected_items_str);
+    QMessageBox::information(this, "Add New Order", "Added");
+    closeUI();
+}
+
+void Addorder::closeUI() {
+    ui->Guestnumber_LE->clear();
+    ui->Table_LE->clear();
+    ui->Info_LE->clear();
+    ui->Search_LE_2->clear();
+    ui->Total_L_2->clear();
+
+    guests = 0;
+    order_type = "Dine In";
+    customer_id = -1;
+    itemAmounts.clear();
+    selectedItems.clear();
+    total = 0.0;
+
+    QLayoutItem *item;
+    while ((item = verticalLayout->takeAt(0))) {
+        delete item->widget();
+        delete item;
+    }
+
+    close();
+    setFixedHeight(435);
+    setFixedWidth(320);
+    ui->stackedWidget->setCurrentWidget(ui->Neworder_QW);
 }

@@ -46,6 +46,7 @@ private slots:
     void on_Additems_PB_clicked();
     void on_Search_LE_2_textChanged(const QString &arg1);
     void updateItemAmount(int item_id, int amount);
+    void closeUI();
 
 private:
     Ui::Addorder *ui;

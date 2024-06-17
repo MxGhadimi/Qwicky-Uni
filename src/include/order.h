@@ -13,6 +13,9 @@
 #include <QCheckBox>
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QGridLayout>
+#include <QScrollArea>
+#include "orderitems.h"
 
 namespace Ui {
 class Order;
@@ -27,9 +30,22 @@ public:
     ~Order();
     void writeData(int customer_id, const QString &table, const QString &order_type, const QString &selected_items_str);
     void writeOrderItems(const QString &selected_items_str, int order_id);
+    void readData(int input_item_id);
+    void showData();
 
 private:
     Ui::Order *ui;
+    QVBoxLayout *verticalLayout;
+    QWidget *scrollWidget;
+    int order_id;
+    QString customer_id;
+    QString table;
+    QString order_type;
+    QString date;
+    QString time;
+    QString pay_status;
+    QString name;
+    double total_price;
 };
 
 #endif // ORDER_H

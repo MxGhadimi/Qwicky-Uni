@@ -639,16 +639,62 @@ QPushButton:pressed {
       <height>701</height>
      </rect>
     </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>240</red>
+          <green>240</green>
+          <blue>236</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>240</red>
+          <green>240</green>
+          <blue>236</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>240</red>
+          <green>240</green>
+          <blue>236</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>240</red>
+          <green>240</green>
+          <blue>236</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="Dashboard_QW">
      <widget class="QPushButton" name="Neworder_PB">
       <property name="geometry">
        <rect>
-        <x>810</x>
-        <y>20</y>
-        <width>250</width>
+        <x>799</x>
+        <y>70</y>
+        <width>261</width>
         <height>60</height>
        </rect>
       </property>
@@ -799,8 +845,8 @@ QPushButton::pressed {
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>20</y>
-        <width>250</width>
+        <y>70</y>
+        <width>241</width>
         <height>150</height>
        </rect>
       </property>
@@ -835,9 +881,9 @@ color: rgb(31, 48, 58);
      <widget class="QGroupBox" name="widget4_GB">
       <property name="geometry">
        <rect>
-        <x>810</x>
-        <y>90</y>
-        <width>250</width>
+        <x>799</x>
+        <y>150</y>
+        <width>261</width>
         <height>311</height>
        </rect>
       </property>
@@ -906,9 +952,9 @@ font: 600 8pt &quot;Segoe UI&quot;;</string>
      <widget class="QGroupBox" name="widget3_GB">
       <property name="geometry">
        <rect>
-        <x>540</x>
-        <y>20</y>
-        <width>250</width>
+        <x>530</x>
+        <y>70</y>
+        <width>241</width>
         <height>150</height>
        </rect>
       </property>
@@ -943,9 +989,9 @@ color: rgb(31, 48, 58);
      <widget class="QGroupBox" name="widget2_GB">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>20</y>
-        <width>250</width>
+        <x>270</x>
+        <y>70</y>
+        <width>241</width>
         <height>150</height>
        </rect>
       </property>
@@ -976,6 +1022,71 @@ color: rgb(31, 48, 58);
         <string>Total Orders</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QLabel" name="Ourmenu_L_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(31, 48, 58);
+
+font: 600 26pt &quot;Monotype Corsiva&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Dashboard</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>30</y>
+        <width>181</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QDateEdit {
+	background: rgb(240, 240, 236);
+	color: rgb(31, 48, 58);
+	font: 650 10pt &quot;Segoe UI&quot;;
+}</string>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="accelerated">
+       <bool>false</bool>
+      </property>
+      <property name="keyboardTracking">
+       <bool>true</bool>
+      </property>
+      <property name="showGroupSeparator" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="displayFormat">
+       <string>dddd, yyyy MMMM dd</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>false</bool>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="Settings_QW">
@@ -1299,7 +1410,7 @@ font: 600 26pt &quot;Monotype Corsiva&quot;;</string>
        <string>Our Menu</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="Search_LE">
+     <widget class="QLineEdit" name="Menusearch_LE">
       <property name="geometry">
        <rect>
         <x>549</x>
@@ -1369,23 +1480,155 @@ color: rgb(255, 0, 4);</string>
      </widget>
     </widget>
     <widget class="QWidget" name="Orders_QW">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="Searchlogo_L_2">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>200</y>
-        <width>231</width>
-        <height>191</height>
+        <x>1010</x>
+        <y>20</y>
+        <width>25</width>
+        <height>25</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 48pt &quot;Segoe UI&quot;;
-color: rgb(255, 0, 4);</string>
+       <string notr="true">background: none;</string>
       </property>
       <property name="text">
-       <string>Orders</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="../data/mainresources.qrc">:/icons/images/icons/search.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLineEdit" name="Search_LE_2">
+      <property name="geometry">
+       <rect>
+        <x>809</x>
+        <y>15</y>
+        <width>231</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+	background-color: white;
+	color: rgb(31, 48, 58);
+	border-radius: 5px;
+	border-color: rgb(188, 193, 193);
+	padding-left: 5px;
+	padding-right: 30px;
+}
+
+QLineEdit:focus {
+    border-color: rgb(52, 81, 98);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>1001</width>
+        <height>621</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0" colspan="2">
+        <widget class="QScrollArea" name="scrollArea_3">
+         <property name="styleSheet">
+          <string notr="true">QScrollArea {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+QScrollArea &gt; QWidget &gt; QWidget {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar:vertical {
+    background: rgb(223, 229, 229); 
+    width: 4px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::handle:vertical {
+    background:  rgb(255, 137, 64);
+    min-height: 3px;
+    border-radius: 2px;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::add-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::sub-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::add-page:vertical, QScrollArea &gt; QWidget &gt; QScrollBar::sub-page:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+         </property>
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>999</width>
+            <height>619</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>Search_LE_2</zorder>
+     <zorder>gridLayoutWidget_2</zorder>
+     <zorder>Searchlogo_L_2</zorder>
     </widget>
    </widget>
   </widget>

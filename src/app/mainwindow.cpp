@@ -8,9 +8,14 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Qwicky");
     QIcon icon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/iconqwicky.png");
     QApplication::setWindowIcon(icon);
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "Login/Signup");
+    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "Admin");
     QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admin.db";
     database.setDatabaseName(dbpath);
+    if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
+
+    QSqlDatabase database2 = QSqlDatabase::addDatabase("QSQLITE", "Items");
+    QString dbpath2 = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/items.db";
+    database.setDatabaseName(dbpath2);
     if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
 
     ui->Password_LE->setEchoMode(QLineEdit::Password);
@@ -38,12 +43,10 @@ void MainWindow::checkLoginFile() {
         QString user_type = in.readLine();
 
         if (user_type == "admin") {
-            closeDatabaseConnection();
             hide();
             emit showAdminDashboardPage();
         }
         else if (user_type == "customer") {
-            closeDatabaseConnection();
             hide();
             emit showCustomerDashboardPage();
         }
@@ -76,12 +79,10 @@ void MainWindow::on_Login_PB_clicked() {
         }
 
         if (user_type == "admin") {
-            closeDatabaseConnection();
             hide();
             emit showAdminDashboardPage();
         }
         else if (user_type == "customer") {
-            closeDatabaseConnection();
             hide();
             emit showCustomerDashboardPage();
         }
@@ -202,12 +203,10 @@ void MainWindow::on_Login2_PB_clicked() {
     if (q.next()) {
         QString user_type = q.value(0).toString();
         if (user_type == "admin") {
-            closeDatabaseConnection();
             emit showAdminDashboardPage();
             this->hide();
         }
         else if (user_type == "customer") {
-            closeDatabaseConnection();
             emit showCustomerDashboardPage();
             this->hide();
         }
@@ -276,13 +275,5 @@ void MainWindow::checkPasswordStrength (const QString &password) {
 
 void MainWindow::on_Back_PB_clicked() {
     ui -> stackedWidget -> setCurrentWidget(ui->Login_QW);
-}
-
-void MainWindow::closeDatabaseConnection() {
-    QSqlDatabase database = QSqlDatabase::database("Login/Signup");
-    if (database.isOpen()) {
-        database.close();
-        qDebug() << "Database(Login/Signup) connection closed.";
-    }
 }
 
