@@ -1,5 +1,6 @@
 #include "admindashboard.h"
 #include "ui_admindashboard.h"
+#include "order.h"
 
 AdminDashboard::AdminDashboard(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,25 @@ AdminDashboard::AdminDashboard(QWidget *parent)
     QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/items.db";
     database.setDatabaseName(dbpath);
     if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
+
+
+    QSqlDatabase database2 = QSqlDatabase::addDatabase("QSQLITE", "admin");
+    QString dbpath2 = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admin.db";
+    database2.setDatabaseName(dbpath2);
+    if (!database2.open()) qDebug() << "Failed to open database" << database2.lastError().text();
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &AdminDashboard::updateDate);
+    timer->start(1000);
+
+    scrollWidget_3 = new QWidget(this);
+    gridLayout_3 = new QGridLayout(scrollWidget_3);
+    gridLayout_3->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    ui->scrollArea_3->setWidgetResizable(true);
+    ui->scrollArea_3->setWidget(scrollWidget_3);
+
+    gridLayout_3->setVerticalSpacing(5);
+    gridLayout_3->setHorizontalSpacing(5);
 }
 
 AdminDashboard::~AdminDashboard() {
@@ -20,6 +40,10 @@ AdminDashboard::~AdminDashboard() {
     if (database.isOpen()) database.close();
     QSqlDatabase::removeDatabase("admin-items");
     delete ui;
+}
+
+void AdminDashboard::updateDate() {
+    ui->dateEdit->setDate(QDate::currentDate());
 }
 
 void AdminDashboard::on_Dashboard_PB_clicked() {
@@ -48,7 +72,7 @@ void AdminDashboard::on_Menu_PB_clicked() {
     ui->Settings_PB->setStyleSheet(defaultstyle);
     showMenu();
 
-    ui->Search_LE->setPlaceholderText("Search for an item...");
+    ui->Menusearch_LE->setPlaceholderText("Search for an item...");
 }
 
 void AdminDashboard::on_Reservations_PB_clicked() {
@@ -75,6 +99,8 @@ void AdminDashboard::on_Orders_PB_clicked() {
     ui->Reservations_PB->setStyleSheet(defaultstyle);
     ui->Tabels_PB->setStyleSheet(defaultstyle);
     ui->Settings_PB->setStyleSheet(defaultstyle);
+
+    showOrders();
 }
 
 
@@ -141,7 +167,7 @@ void AdminDashboard::showMenu() {
     connect(ui->scrollArea, &QScrollArea::destroyed, scrollWidget, &QObject::deleteLater);
 }
 
-void AdminDashboard::on_Search_LE_textChanged(const QString &arg1) {
+void AdminDashboard::on_Menusearch_LE_textChanged(const QString &arg1) {
     QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT * FROM Items WHERE name LIKE :search OR description LIKE :search");
     q.bindValue(":search", "%" + arg1 + "%");
@@ -177,5 +203,30 @@ void AdminDashboard::on_Search_LE_textChanged(const QString &arg1) {
 
 void AdminDashboard::on_Neworder_PB_clicked() {
     emit showAddorderPage();
+}
+
+void AdminDashboard::showOrders() {
+    QSqlQuery q(QSqlDatabase::database("admin-items"));
+    q.prepare("SELECT order_id FROM Orders");
+    if (q.exec()) {
+        int row = 0, column = 0;
+        while(q.next()) {
+            int order_id = q.value("order_id").toInt();
+            Order *order = new Order(this);
+            order->readData(order_id);
+            order->showData();
+            order->setMinimumSize(315, 355);
+            order->setMaximumSize(315, 355);
+
+            gridLayout_3->addWidget(order, row, column);
+            if (++column >= 3) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+    else qDebug() << "Error executing query (AdminDashboard showOrders)";
+
+    ui->gridLayout_3->addWidget(ui->scrollArea_3);
 }
 

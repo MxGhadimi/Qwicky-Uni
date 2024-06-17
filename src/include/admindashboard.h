@@ -16,6 +16,9 @@
 #include "QSqlQueryModel"
 #include <QSqlError>
 #include <QScrollArea>
+#include <QTimer>
+#include <QScrollArea>
+#include <QGridLayout>
 #include "item.h"
 
 
@@ -32,12 +35,17 @@ public:
 
 public slots:
     void showMenu();
+    void showOrders();
 
 signals:
     void showAdditemPage();
     void showAddorderPage();
 
 private slots:
+        // utils
+    void updateDate();
+
+        // Menu
     void on_Dashboard_PB_clicked();
     void on_Menu_PB_clicked();
     void on_Reservations_PB_clicked();
@@ -45,15 +53,16 @@ private slots:
     void on_Tabels_PB_clicked();
     void on_Settings_PB_clicked();
 
-        // Menu
-    void on_Additem_PB_clicked();
-
-    void on_Search_LE_textChanged(const QString &arg1);
-
+        // Items
     void on_Neworder_PB_clicked();
+    void on_Additem_PB_clicked();
+    // void showMenu();
+    void on_Menusearch_LE_textChanged(const QString &arg1);
 
 private:
     Ui::AdminDashboard *ui;
+    QWidget *scrollWidget_3;
+    QGridLayout *gridLayout_3;
 };
 
 #endif // ADMINDASHBOARD_H

@@ -13,7 +13,7 @@ Ingredient::~Ingredient()
     delete ui;
 }
 
-void Ingredient::setData(QString input_ingredients, int input_item_id) {
+void Ingredient::setData(const QString &input_ingredients, int input_item_id) {
     QSqlQuery q;
     QStringList ingredientsList = input_ingredients.split(", ");
     for (const QString &ingredient : ingredientsList) {
@@ -30,7 +30,7 @@ void Ingredient::setData(QString input_ingredients, int input_item_id) {
     }
 }
 
-void Ingredient::updateIngredient(QString input_ingredients, int input_item_id) {
+void Ingredient::updateIngredient(const QString &input_ingredients, int input_item_id) {
     QSqlQuery q;
     q.prepare("DELETE FROM Ingredients WHERE item_id = :item_id");
     q.bindValue(":item_id", input_item_id);

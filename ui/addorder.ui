@@ -1066,9 +1066,9 @@ QPushButton::pressed {
      <widget class="QWidget" name="gridLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>70</y>
-        <width>771</width>
+        <width>781</width>
         <height>551</height>
        </rect>
       </property>
@@ -1148,7 +1148,7 @@ QMenu::separator {
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>769</width>
+            <width>779</width>
             <height>549</height>
            </rect>
           </property>
