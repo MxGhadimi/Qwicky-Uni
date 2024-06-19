@@ -11,7 +11,7 @@ Addorder::Addorder(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("Add Order");
-    setFixedHeight(435);
+    setFixedHeight(430);
     setFixedWidth(320);
 
     QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "addorder");
@@ -59,8 +59,15 @@ void Addorder::on_Choosetable_PB_clicked() {
     QSqlQuery q(QSqlDatabase::database("admin-items"));
     if (match.hasMatch()) {
         int capacity = match.captured(0).toInt();
-        q.prepare("SELECT * FROM Tables WHERE capacity = ?");
-        q.bindValue(0, capacity);
+        QDate date = ui->dateEdit->date();
+        QString date_str = date.toString("yyyy-MM-dd");
+        QTime time = ui->timeEdit->time();
+        QString time_str = time.toString("HH:mm");
+
+        q.prepare("SELECT * FROM Tables WHERE capacity = :capacity AND table_name NOT IN (SELECT table_name FROM Tabletime WHERE date = :date AND time = :time)");
+        q.bindValue(":capacity", capacity);
+        q.bindValue(":date", date_str);
+        q.bindValue(":time", time_str);
         if (!q.exec()) qDebug() << "Error executing query: " << q.lastError().text();
     }
     else qDebug() << "Invalid capacity";
@@ -95,8 +102,8 @@ void Addorder::on_Choosetable_PB_clicked() {
 }
 
 void Addorder::on_Takeaway_RB_clicked() {
-    this->setFixedHeight(285);
-    ui->Continueorder_PB->move(50, 235);
+    this->setFixedHeight(290);
+    ui->Continueorder_PB->move(50, 265);
     ui->Guestnumber_L->hide();
     ui->Guestnumber_LE->hide();
     ui->Addperson_PB->hide();
@@ -107,8 +114,8 @@ void Addorder::on_Takeaway_RB_clicked() {
 
 void Addorder::on_Dinein_RB_clicked() {
     ui->Info_L->show();
-    ui->Continueorder_PB->move(50, 380);
-    setFixedHeight(435);
+    ui->Continueorder_PB->move(50, 400);
+    setFixedHeight(430);
     ui->Guestnumber_L->show();
     ui->Guestnumber_LE->show();
     ui->Addperson_PB->show();
@@ -146,11 +153,12 @@ void Addorder::on_Continueorder_PB_clicked() {
 
     if (q.exec()) {
         if (q.next()) customer_id = q.value(0).toInt();
-        else qDebug() << "No customer found with the given information.";
+        else QMessageBox::critical(this, "UserInfo", "no user with this information was found!");
     }
     else qDebug() << "Query execution failed: " << q.lastError().text();
 
-    if (-1 == customer_id) QMessageBox::critical(this, "UserInfo", "no user with this information was found.");
+    if ("Dine In" == order_type && ui->Table_LE->text().isEmpty()) QMessageBox::critical(this, "Table", "Please Choose a Table!");
+
     else {
         ui->stackedWidget->setCurrentWidget(ui->Items_QW);
         setFixedHeight(650);
@@ -267,8 +275,13 @@ void Addorder::on_Additems_PB_clicked() {
         selected_items_str.chop(2);
     }
 
+    QDate date = ui->dateEdit->date();
+    QString date_str = date.toString("yyyy-MM-dd");
+    QTime time = ui->timeEdit->time();
+    QString time_str = time.toString("HH:mm");
+
     Order *order = new Order(this);
-    order->writeData(customer_id, ui->Table_LE->text(), order_type, selected_items_str);
+    order->writeData(customer_id, ui->Table_LE->text(), order_type, selected_items_str, date_str, time_str);
     QMessageBox::information(this, "Add New Order", "Added");
     closeUI();
 }
@@ -279,6 +292,8 @@ void Addorder::closeUI() {
     ui->Info_LE->clear();
     ui->Search_LE_2->clear();
     ui->Total_L_2->clear();
+    ui->timeEdit->clear();
+    ui->dateEdit->clear();
 
     guests = 0;
     order_type = "Dine In";

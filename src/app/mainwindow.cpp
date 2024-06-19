@@ -150,11 +150,13 @@ void MainWindow::on_SignUp2_PB_clicked() {
             if (name.isEmpty()) message += "Name, ";
             if (lastname.isEmpty()) message += "Lastname, ";
             if (phonenumber.isEmpty()) message += "Phonenumber, ";
-            if (address.isEmpty()) message += "Address";
+            if (address.isEmpty()) message += "Address, ";
+            message.chop(2);
 
             QMessageBox empty;
             empty.setText("Are you sure you want to leave these fields empty?");
             empty.setInformativeText(message);
+            empty.setIcon(QMessageBox::Warning);
             empty.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             empty.setDefaultButton(QMessageBox::No);
 

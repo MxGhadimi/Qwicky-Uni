@@ -26,7 +26,7 @@ Order::~Order()
     delete ui;
 }
 
-void Order::writeData(int customer_id, const QString &table, const QString &order_type, const QString &selected_items_str) {
+void Order::writeData(int customer_id, const QString &table, const QString &order_type, const QString &selected_items_str, const QString &date_str, const QString &time_str) {
     QString last_order_id;
     QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT MAX(order_id) FROM Orders");
@@ -46,11 +46,14 @@ void Order::writeData(int customer_id, const QString &table, const QString &orde
         order_id = (left_part + right_part).toInt();
     }
 
-    q.prepare("INSERT INTO Orders (order_id, customer_id, [table], order_type) VALUES (:order_id, :customer_id, :table, :order_type)");
+    q.prepare("INSERT INTO Orders (order_id, customer_id, [table], order_type, date, time, pay_status) VALUES (:order_id, :customer_id, :table, :order_type, :date, :time, :pay_status)");
     q.bindValue(":order_id", order_id);
     q.bindValue(":customer_id", customer_id);
     q.bindValue(":table", table.isEmpty()? "TA" : table);
     q.bindValue(":order_type", order_type);
+    q.bindValue(":date", date_str);
+    q.bindValue(":time", time_str);
+    q.bindValue(":pay_status", "pending");
     if (q.exec()) {
         QStringList itemsList = selected_items_str.split(", ");
         for (const QString &item : itemsList) {
@@ -64,11 +67,19 @@ void Order::writeData(int customer_id, const QString &table, const QString &orde
                 q2.bindValue(":order_id", order_id);
                 q2.bindValue(":item_id", item_id);
                 q2.bindValue(":amount", amount);
-                if (!q2.exec()) qDebug() << "Failed to insert into OrderItems table: " << q2.lastError().text();
+                if (!q2.exec()) qDebug() << "Failed to insert into OrderItems (Orders writeData2): " << q2.lastError().text();
             }
         }
     }
-    else qDebug() << "Failed to insert into Orders table: " << q.lastError().text() << customer_id << table << order_type;
+    else qDebug() << "Failed to insert into Orders (Orders writeData1): " << q.lastError().text();
+
+    QSqlQuery q3(QSqlDatabase::database("admin-items"));
+    q3.prepare("INSERT INTO Tabletime (table_name, date, time, order_id) VALUES (:table_name, :date, :time, :order_id)");
+    q3.bindValue(":table_name", table);
+    q3.bindValue(":date", date_str);
+    q3.bindValue(":time", time_str);
+    q3.bindValue(":order_id", order_id);
+    if (!q3.exec()) qDebug() << "Failed to insert into Tabletime (Orders writeData3): " << q3.lastError().text();
 }
 
 void Order::readData(int input_item_id) {
@@ -102,6 +113,8 @@ void Order::showData() {
     ui->Customerinfo_PB->setText(name);
     ui->Orderid_PB->setText("#" + QString::number(order_id));
     ui->Orderstatus_L->setText(order_type);
+    ui->dateEdit->setDate(QDate::fromString(date));
+    ui->timeEdit->setTime(QTime::fromString(time));
 
     total_price = 0;
     QSqlQuery q(QSqlDatabase::database("admin-items"));

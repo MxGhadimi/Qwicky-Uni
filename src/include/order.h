@@ -28,7 +28,7 @@ class Order : public QWidget
 public:
     explicit Order(QWidget *parent = nullptr);
     ~Order();
-    void writeData(int customer_id, const QString &table, const QString &order_type, const QString &selected_items_str);
+    void writeData(int customer_id, const QString &table, const QString &order_type, const QString &selected_items_str, const QString &date_str, const QString &time_str);
     void writeOrderItems(const QString &selected_items_str, int order_id);
     void readData(int input_item_id);
     void showData();

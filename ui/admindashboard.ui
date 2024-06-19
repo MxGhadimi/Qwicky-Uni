@@ -686,7 +686,7 @@ QPushButton:pressed {
      </palette>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Dashboard_QW">
      <widget class="QPushButton" name="Neworder_PB">
