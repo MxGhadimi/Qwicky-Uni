@@ -127,9 +127,9 @@ border-radius: 8px;</string>
    <widget class="QLabel" name="Total_L_2">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>180</x>
       <y>315</y>
-      <width>81</width>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -466,7 +466,7 @@ text-align: left;</string>
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>141</width>
+      <width>151</width>
       <height>25</height>
      </rect>
     </property>

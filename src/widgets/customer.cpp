@@ -1,5 +1,6 @@
 #include "customer.h"
 #include "ui_customer.h"
+#include "showcustomer.h"
 
 Customer::Customer(QWidget *parent)
     : QWidget(parent)
@@ -17,8 +18,7 @@ Customer::~Customer()
     delete ui;
 }
 
-void Customer::writeData(QString input_first_name, QString input_last_name, QString input_phone_number, QString input_address, double input_credit, double input_debt, QString input_username, QString input_password, int input_customer_id) {
-    customer_id = input_customer_id;
+void Customer::writeData(QString input_first_name, QString input_last_name, QString input_phone_number, QString input_address, double input_credit, double input_debt, QString input_username, QString input_password) {
     QSqlQuery q(QSqlDatabase::database("customer"));
     q.prepare("INSERT INTO Customers (first_name, last_name, phone_number, address, debt, credit, username, password) VALUES (:first_name, :last_name, :phone_number, :address, :debt, :credit, :username, :password)");
     q.bindValue(":first_name", input_first_name);
@@ -51,7 +51,7 @@ void Customer::readData(int input_customer_id) {
     }
     else qDebug() << "No rows found in the table";
 }
-/*
+
 void Customer::showData() {
     ui->FirstName_L->setText(first_name);
     ui->LastName_L->setText(last_name);
@@ -60,9 +60,8 @@ void Customer::showData() {
     ui->Credit_L->setText("$" + QString::number(credit));
     ui->Debt_L->setText("$" + QString::number(debt));
     ui->Username_L->setText(username);
-    ui->Password_L->setText(password);
+    ui->Customerid_L->setText(QString::number(customer_id));
 }
-*/
 
 void Customer::updateFirstName(QString input_first_name, int customer_id) {
     QSqlQuery q(QSqlDatabase::database("customer"));
@@ -111,3 +110,33 @@ void Customer::updateDebt(double input_debt, int customer_id) {
     q.bindValue(":id", customer_id);
     if (!q.exec()) qDebug() << "Failed to update";
 }
+
+void Customer::updateUsername(const QString &input_username, int customer_id) {
+    QSqlQuery q(QSqlDatabase::database("customer"));
+    q.prepare("UPDATE Customers SET username = :username WHERE id = :id");
+    q.bindValue(":username", input_username);
+    q.bindValue(":id", customer_id);
+    if (!q.exec()) qDebug() << "Failed to update";
+}
+
+
+void Customer::on_Edit_PB_clicked() {
+    Showcustomer *showcustomer = new Showcustomer(nullptr);;
+    showcustomer->showData(customer_id);
+    showcustomer->show();
+}
+
+
+void Customer::on_Delete_PB_clicked() {
+    QSqlQuery q(QSqlDatabase::database("customer"));
+    q.prepare("DELETE FROM Customers WHERE id = :id");
+    q.bindValue(":id", customer_id);
+    if (!q.exec()) qDebug() << "Failed to delete customer: " << q.lastError().text();
+    else {
+        qDebug() << "Customer deleted successfully";
+        QMessageBox::information(nullptr, "Delete Order", "Deleted!");
+        close();
+    }
+    delete this;
+}
+

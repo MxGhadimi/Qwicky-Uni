@@ -538,7 +538,7 @@ QCheckBox::indicator:checked {
        <rect>
         <x>10</x>
         <y>400</y>
-        <width>120</width>
+        <width>131</width>
         <height>30</height>
        </rect>
       </property>
@@ -564,9 +564,9 @@ QPushButton::pressed {
      <widget class="QPushButton" name="Delete_PB">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>169</x>
         <y>400</y>
-        <width>120</width>
+        <width>131</width>
         <height>30</height>
        </rect>
       </property>
@@ -576,6 +576,7 @@ QPushButton::pressed {
     border: none;
     border-radius: 5px;
 	font: 600 11pt &quot;Segoe UI&quot;;
+	color: rgb(255, 255, 255);
 }
 QPushButton:hover {
     background-color: rgb(7, 132, 136);
@@ -721,7 +722,8 @@ text-align: left;</string>
        <string notr="true">background: rgb(6, 106, 110);
 border: none;
 border-radius: 12px;
-font: 700 15pt &quot;Segoe UI&quot;;</string>
+font: 700 15pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>A4</string>

@@ -15,7 +15,7 @@ set(PROJECT_SOURCES
     src/widgets/order.cpp
     src/widgets/orderitems.cpp
     src/widgets/showorder.cpp
-
+    src/widgets/showcustomer.cpp
     src/utils/Ceasor.cpp
 )
 
@@ -35,4 +35,5 @@ set(PROJECT_HEADERS
     src/include/commonincludes.h
     src/include/showorder.h
     src/include/Ceasor.h
+    src/include/showcustomer.h
 )

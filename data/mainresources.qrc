@@ -16,11 +16,10 @@
         <file>images/icons/menu.png</file>
         <file>images/icons/monday.png</file>
         <file>images/icons/openeye.png</file>
-        <file>images/icons/order.png</file>
+        <file>images/icons/customer.png</file>
         <file>images/icons/plus.png</file>
         <file>images/icons/quit.png</file>
         <file>images/icons/remove.png</file>
-        <file>images/icons/reservation.png</file>
         <file>images/icons/saturday.png</file>
         <file>images/icons/search.png</file>
         <file>images/icons/settings.png</file>
@@ -32,5 +31,11 @@
         <file>images/icons/backward.png</file>
         <file>images/icons/check.png</file>
         <file>images/icons/timer.png</file>
+        <file>images/icons/order.png</file>
+        <file>images/icons/notification.png</file>
+        <file>images/icons/reservation.png</file>
+        <file>images/icons/table.png</file>
+        <file>images/icons/totalorders.png</file>
+        <file>images/icons/user.png</file>
     </qresource>
 </RCC>

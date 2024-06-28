@@ -60,17 +60,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>2</width>
-      <height>2</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout"/>
-   </widget>
    <widget class="QGroupBox" name="Menu_GB">
     <property name="geometry">
      <rect>
@@ -104,7 +93,7 @@ border: none;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="data/images/mainresources.qrc">:/new/prefix1/logo2.png</pixmap>
+      <pixmap resource="../data/mainresources.qrc">:/new/prefix1/images/logo2.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -127,13 +116,13 @@ font: 550 16pt &quot;Segoe UI&quot;;</string>
       <string>wicky</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget_2">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>120</y>
        <width>203</width>
-       <height>251</height>
+       <height>211</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -191,8 +180,8 @@ QPushButton:pressed {
           <string>  Dashboard</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/menu.png</normaloff>:/icons/icons/menu.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/menu.png</normaloff>:/icons/images/icons/menu.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -257,74 +246,8 @@ QPushButton:pressed {
           <string>  Menu</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/fmenu.png</normaloff>:/icons/icons/fmenu.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="reservations">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>201</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>201</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: none;</string>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <widget class="QPushButton" name="Reservations_PB">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>4</x>
-           <y>0</y>
-           <width>190</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    font: 700 12pt &quot;Segoe UI&quot;;
-    color: rgb(31, 48, 58);
-    text-align: left;
-    padding: 10px 20px;
-    background-color: none;
-}
-QPushButton:hover {
-    background-color: rgb(255, 215, 147);
-}
-QPushButton:pressed {
-    background-color: rgb(255, 137, 64);
-}</string>
-         </property>
-         <property name="text">
-          <string>  Reservation</string>
-         </property>
-         <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/reservation.png</normaloff>:/icons/icons/reservation.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/fmenu.png</normaloff>:/icons/images/icons/fmenu.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -389,8 +312,8 @@ QPushButton:pressed {
           <string>  Order</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/order.png</normaloff>:/icons/icons/order.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/order.png</normaloff>:/icons/images/icons/order.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -455,8 +378,8 @@ QPushButton:pressed {
           <string>  Tables</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/order.png</normaloff>:/icons/icons/order.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/order.png</normaloff>:/icons/images/icons/order.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -469,7 +392,7 @@ QPushButton:pressed {
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="layoutWidget_3">
+    <widget class="QWidget" name="layoutWidget_2">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -545,8 +468,8 @@ QPushButton:pressed {
           <string>Settings</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/settings.png</normaloff>:/icons/icons/settings.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/settings.png</normaloff>:/icons/images/icons/settings.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -623,8 +546,8 @@ QPushButton:pressed {
           <string>Log Out</string>
          </property>
          <property name="icon">
-          <iconset resource="data/images/mainresources.qrc">
-           <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
+          <iconset resource="../data/mainresources.qrc">
+           <normaloff>:/icons/images/icons/quit.png</normaloff>:/icons/images/icons/quit.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -642,7 +565,7 @@ QPushButton:pressed {
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="data/images/mainresources.qrc"/>
+  <include location="../data/mainresources.qrc"/>
  </resources>
  <connections/>
 </ui>

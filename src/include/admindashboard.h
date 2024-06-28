@@ -5,6 +5,8 @@
 #include "commonincludes.h"
 #include "item.h"
 #include "order.h"
+#include "showcustomer.h"
+#include "customer.h"
 
 namespace Ui {
 class AdminDashboard;
@@ -20,6 +22,7 @@ public:
 public slots:
     void showMenu();
     void showOrders();
+    void showCustomers();
 
 signals:
     void showAdditemPage();
@@ -42,6 +45,12 @@ private slots:
     void on_Additem_PB_clicked();
     // void showMenu();
     void on_Menusearch_LE_textChanged(const QString &arg1);
+
+    void on_Customer_PB_clicked();
+
+    void on_Newcustomer_PB_clicked();
+
+    void on_Search_LE_textChanged(const QString &arg1);
 
 private:
     Ui::AdminDashboard *ui;
