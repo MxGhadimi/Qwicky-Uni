@@ -2,6 +2,7 @@
 #define ADDCUSTOMER_H
 
 #include <QWidget>
+#include "commonincludes.h"
 
 namespace Ui {
 class Addcustomer;

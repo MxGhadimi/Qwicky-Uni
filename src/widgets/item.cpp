@@ -1,5 +1,6 @@
 #include "item.h"
 #include "ui_item.h"
+#include <stdexcept>
 
 
 Item::Item(QWidget *parent)
@@ -24,7 +25,6 @@ Item::~Item()
 
 void Item::writeData(QByteArray input_image, const QString &input_name, const QString &input_description, const QString &input_price, const QString &input_days, const QString &input_category, int input_item_id) {
     item_id = input_item_id;
-    Check_CB->setProperty("item_id", item_id);
     QSqlQuery q;
     q.prepare("INSERT INTO Items (image, name, description, price, days, category) VALUES (:image, :name, :description, :price, :days, :category)");
     q.bindValue(":image", input_image);
@@ -33,7 +33,10 @@ void Item::writeData(QByteArray input_image, const QString &input_name, const QS
     q.bindValue(":price", input_price.trimmed());
     q.bindValue(":days", input_days);
     q.bindValue(":category", input_category);
-    if (!q.exec()) qDebug() << "Failed to insert item: " << q.lastError().text();
+    if (!q.exec()) {
+        qDebug() << "Failed to insert item: " << q.lastError().text();
+        throw std::runtime_error("Failed to insert item: ");
+    }
 }
 
 
@@ -65,7 +68,7 @@ void Item::showData() {
 
 void Item::on_Name_PB_clicked() {
     Showitem *showitem = new Showitem(this);
-    showitem->setData(item_id);
+    showitem->writeData(item_id);
     connect(showitem, &QObject::destroyed, showitem, &QObject::deleteLater);
     showitem->show();
 }
@@ -116,15 +119,15 @@ void Item::showAmount() {
     ui->Removeamount_PB->show();
 }
 
-void Item::setAmountText(const QString &text) {
-    ui->Amount_L->setText(text);
+void Item::setAmountText(int input_amount) {
+    amount = input_amount;
+    ui->Amount_L->setText(QString::number(amount));
 }
 
 void Item::on_Addamount_PB_clicked() {
     ui->Amount_L->setText(QString::number(++amount));
     emit amountChanged(item_id, amount);
 }
-
 
 void Item::on_Removeamount_PB_clicked() {
     if (0 == amount) return;

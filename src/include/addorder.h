@@ -2,24 +2,7 @@
 #define ADDORDER_H
 
 #include <QWidget>
-#include <QSqlDatabase>
-#include <QDir>
-#include <QFile>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QTextCursor>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QEvent>
-#include <QCloseEvent>
-#include <QMainWindow>
-#include <QLineEdit>
-#include <QScrollArea>
-#include <QGridLayout>
-#include <QRegularExpressionMatch>
+#include "commonincludes.h"
 #include "showselected.h"
 
 namespace Ui {
@@ -42,7 +25,7 @@ private slots:
     void on_Continueorder_PB_clicked();
     void on_Addperson_PB_clicked();
     void on_RemovePerson_PB_clicked();
-    void on_deleteamount_PB_clicked();
+    void on_Back_PB_clicked();
     void on_Additems_PB_clicked();
     void on_Search_LE_2_textChanged(const QString &arg1);
     void updateItemAmount(int item_id, int amount);

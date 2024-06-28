@@ -150,7 +150,7 @@ text-align: left;</string>
    <widget class="QPushButton" name="Orderid_PB">
     <property name="geometry">
      <rect>
-      <x>115</x>
+      <x>112</x>
       <y>42</y>
       <width>71</width>
       <height>16</height>
@@ -423,7 +423,7 @@ text-align: left;</string>
    <widget class="QLabel" name="Order_L">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>67</x>
       <y>40</y>
       <width>42</width>
       <height>20</height>
@@ -466,7 +466,7 @@ text-align: left;</string>
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>130</width>
+      <width>141</width>
       <height>25</height>
      </rect>
     </property>
@@ -514,7 +514,7 @@ text-align: left;</string>
       <x>10</x>
       <y>10</y>
       <width>50</width>
-      <height>51</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -533,9 +533,9 @@ font: 700 15pt &quot;Segoe UI&quot;;</string>
    <widget class="QCheckBox" name="Paystatus_CB">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>213</x>
       <y>11</y>
-      <width>91</width>
+      <width>85</width>
       <height>24</height>
      </rect>
     </property>
@@ -543,14 +543,27 @@ font: 700 15pt &quot;Segoe UI&quot;;</string>
      <enum>Qt::RightToLeft</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: rgb(255, 204, 153);
-color: rgb(31, 48, 58);
-border: none;
-border-radius: 8px;
-font: 600 10pt &quot;Segoe UI&quot;;</string>
+     <string notr="true">QCheckBox {
+	background: rgb(255, 204, 153);
+	color: rgb(31, 48, 58);
+	border: none;
+	border-radius: 6px;
+	font: 600 10pt &quot;Segoe UI&quot;;
+	padding-right: 6px;
+}
+
+QCheckBox::indicator {
+	background: transparent;
+	border: none;
+   width: 16px;
+   height: 16px;
+}</string>
     </property>
     <property name="text">
-     <string>Not Payed</string>
+     <string>Pending</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLabel" name="Items_L">

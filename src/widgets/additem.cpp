@@ -49,7 +49,6 @@ void Additem::on_Additem_PB_clicked() {
     QString description = ui->Description_TE->toPlainText();
     QString category = ui->Category_C->currentText();
 
-
     if (ui->Monday_CB->isChecked()) days += "Monday ";
     if (ui->Tuesday_CB->isChecked()) days += "Tuesday ";
     if (ui->Wednesday_CB->isChecked()) days += "Wednesday ";
@@ -65,9 +64,9 @@ void Additem::on_Additem_PB_clicked() {
     QSqlQuery q;
     q.exec("SELECT MAX(item_id) FROM Items");
     if (q.next()) {
-        item_id = q.value(0).toInt();
+        item_id = q.value(0).toInt() + 1;
         item->writeData(image_data, name, description, price, days, category, item_id);
-        ingredient->setData(all_ingredients, item_id);
+        ingredient->writeData(all_ingredients, item_id);
         emit itemInserted();
         clearUI();
         QMessageBox::information(this, "Add New Item", "Added");
@@ -122,4 +121,3 @@ void Additem::closeEvent(QCloseEvent *event) {
     all_ingredients.clear();
     event->accept();
 }
-

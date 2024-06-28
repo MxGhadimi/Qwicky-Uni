@@ -19,7 +19,7 @@ Showitem::~Showitem()
     delete ui;
 }
 
-void Showitem::setData(int input_item_id) {
+void Showitem::writeData(int input_item_id) {
     QSqlQuery q;
     q.prepare("SELECT * FROM Items WHERE item_id = :item_id");
     q.bindValue(":item_id", input_item_id);
@@ -135,8 +135,8 @@ void Showitem::on_Edit_PB_clicked() {
         ui->deleteamount_PB->hide();
         ui->Ingredient_LE->hide();
         ui->Ingredients_TE->setStyleSheet("QTextEdit { color: rgb(31, 48, 58); background: rgb(255, 255, 255); border: none; } QScrollBar:vertical { background: rgb(255, 255, 255); width: 3px; border-radius: 2px; } QScrollBar::handle:vertical { background: rgb(255, 137, 64); min-height: 3px; border-radius: 2px; } QScrollBar::add-line:vertical { background: rgb(255, 255, 255); } QScrollBar::sub-line:vertical { background: rgb(255, 255, 255); } QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: rgb(255, 255, 255); } QMenu { border: 1px solid white; border-radius: 5px; background-color: rgb(6, 106, 110); padding: 7px; color: white; } QMenu::item { padding: 4px; } QMenu::item:hover { border: none; outline: none; } QMenu::item:selected { background-color: rgb(255, 137, 64); border-radius: 5px; color: rgb(31, 48, 58); } QMenu::separator { height: 1px; background-color: white; }");
-        setData(item_id);
-        QMessageBox::information(this, "Add New Item", "Added");
+        writeData(item_id);
+        QMessageBox::information(this, "Update Item", "Updated!");
     }
 }
 
@@ -185,14 +185,15 @@ void Showitem::on_Delete_PB_clicked() {
     QSqlQuery q;
     q.prepare("DELETE FROM Items WHERE item_id = :item_id");
     q.bindValue(":item_id", item_id);
-    if (!q.exec()) qDebug() << "Failed to delete item: " << q.lastError().text();
-
-    q.prepare("DELETE FROM Ingredients WHERE item_id = :item_id");
-    q.bindValue(":item_id", item_id);
-    if (q.exec()) {
-        emit updatedItem();
-        QMessageBox::information(this, "Delete item", "Deleted");
+    if (q.exec()){
+        q.prepare("DELETE FROM Ingredients WHERE item_id = :item_id");
+        q.bindValue(":item_id", item_id);
+        if (q.exec()) {
+            QMessageBox::information(this, "Delete item", "Deleted!");
+            emit updatedItem();
+            close();
+        }
+        else qDebug() << "Failed to delete ingredients: " << q.lastError().text();
     }
-    else qDebug() << "Failed to delete ingredients: " << q.lastError().text();
-    close();
+    else qDebug() << "Failed to delete item: " << q.lastError().text();
 }

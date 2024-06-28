@@ -80,9 +80,9 @@
   <widget class="QLabel" name="Price_L">
    <property name="geometry">
     <rect>
-     <x>243</x>
+     <x>238</x>
      <y>0</y>
-     <width>43</width>
+     <width>50</width>
      <height>16</height>
     </rect>
    </property>

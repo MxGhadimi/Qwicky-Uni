@@ -30,5 +30,7 @@
         <file>images/icons/wednesday.png</file>
         <file>images/icons/forward.png</file>
         <file>images/icons/backward.png</file>
+        <file>images/icons/check.png</file>
+        <file>images/icons/timer.png</file>
     </qresource>
 </RCC>

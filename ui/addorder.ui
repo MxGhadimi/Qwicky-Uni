@@ -1395,7 +1395,7 @@ padding-bottom: 3px;</string>
       <property name="geometry">
        <rect>
         <x>760</x>
-        <y>20</y>
+        <y>22</y>
         <width>25</width>
         <height>25</height>
        </rect>
@@ -1836,7 +1836,7 @@ QMenu::separator {
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="deleteamount_PB">
+    <widget class="QPushButton" name="back_PB">
      <property name="geometry">
       <rect>
        <x>272</x>

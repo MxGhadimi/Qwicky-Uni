@@ -1,23 +1,10 @@
 #ifndef ADDITEM_H
 #define ADDITEM_H
 
+#include <QWidget>
+#include "commonincludes.h"
 #include "item.h"
 #include "ingredient.h"
-
-#include <QWidget>
-#include <QSqlDatabase>
-#include <QDir>
-#include <QFile>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QTextCursor>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QEvent>
-#include <QCloseEvent>
 
 namespace Ui {
 class Additem;

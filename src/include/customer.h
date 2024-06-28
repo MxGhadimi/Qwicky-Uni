@@ -1,18 +1,9 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
+
 #include <QWidget>
-#include <QFile>
-#include <QDir>
-#include <QtUiTools/QUiLoader>
-#include <QMessageBox>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QCheckBox>
-#include <QMainWindow>
-#include <QFileDialog>
+#include "commonincludes.h"
 
 namespace Ui {
 class Customer;

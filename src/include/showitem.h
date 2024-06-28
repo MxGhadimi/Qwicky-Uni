@@ -2,19 +2,7 @@
 #define SHOWITEM_H
 
 #include <QWidget>
-#include <QWidget>
-#include <QFile>
-#include <QDir>
-#include <QtUiTools/QUiLoader>
-#include <QMessageBox>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QCheckBox>
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QTimer>
+#include "commonincludes.h"
 #include "item.h"
 #include "ingredient.h"
 
@@ -30,7 +18,7 @@ public:
     explicit Showitem(QWidget *parent = nullptr);
     ~Showitem();
     void showData(int item);
-    void setData(int item);
+    void writeData(int item);
 
 signals:
     void updatedItem();

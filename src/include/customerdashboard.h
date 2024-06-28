@@ -2,6 +2,7 @@
 #define CUSTOMERDASHBOARD_H
 
 #include <QMainWindow>
+#include "commonincludes.h"
 
 namespace Ui {
 class customerdashboard;

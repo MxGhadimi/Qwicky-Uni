@@ -2,25 +2,9 @@
 #define ADMINDASHBOARD_H
 
 #include <QMainWindow>
-#include <QLineEdit>
-#include <QWidget>
-#include <QSqlDatabase>
-#include <QDir>
-#include <QFile>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QTextCursor>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QScrollArea>
-#include <QTimer>
-#include <QScrollArea>
-#include <QGridLayout>
+#include "commonincludes.h"
 #include "item.h"
-
+#include "order.h"
 
 namespace Ui {
 class AdminDashboard;

@@ -2,19 +2,7 @@
 #define ORDER_H
 
 #include <QWidget>
-#include <QFile>
-#include <QDir>
-#include <QtUiTools/QUiLoader>
-#include <QMessageBox>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QCheckBox>
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QGridLayout>
-#include <QScrollArea>
+#include "commonincludes.h"
 #include "orderitems.h"
 
 namespace Ui {
@@ -32,6 +20,15 @@ public:
     void writeOrderItems(const QString &selected_items_str, int order_id);
     void readData(int input_item_id);
     void showData();
+    void updateItems(const QString &selected_items_str, int order_id);
+    void updateDate(const QString &date_str, int order_id);
+    void updateTime(const QString &time_str, int order_id);
+    void updateTable(const QString &table_str, int order_id);
+    void updateOrderType(const QString &order_type, int order_id);
+
+private slots:
+    void on_Paystatus_CB_stateChanged(int arg1);
+    void on_Orderid_PB_clicked();
 
 private:
     Ui::Order *ui;

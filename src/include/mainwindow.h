@@ -1,18 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QMessageBox>
-#include <QDir>
-#include <QFile>
-#include <QIcon>
-#include <QTimer>
-#include <QSqlDatabase>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QRegularExpression>
+#include <QWidget>
+#include "commonincludes.h"
 #include "admindashboard.h"
 #include "customerdashboard.h"
 #include "Ceasor.h"
@@ -54,8 +44,8 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-    customerdashboard *cdashboard;
-    AdminDashboard *adashboard;
+    //customerdashboard *cdashboard;
+    //AdminDashboard *adashboard;
     QFile file;
 
 };

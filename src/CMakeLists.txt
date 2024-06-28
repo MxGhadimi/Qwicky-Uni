@@ -14,6 +14,7 @@ set(PROJECT_SOURCES
     src/widgets/showselected.cpp
     src/widgets/order.cpp
     src/widgets/orderitems.cpp
+    src/widgets/showorder.cpp
 
     src/utils/Ceasor.cpp
 )
@@ -22,7 +23,6 @@ set(PROJECT_HEADERS
     src/include/mainwindow.h
     src/include/customerdashboard.h
     src/include/admindashboard.h
-    src/include/Ceasor.h
     src/include/additem.h
     src/include/item.h
     src/include/showitem.h
@@ -32,4 +32,7 @@ set(PROJECT_HEADERS
     src/include/showselected.h
     src/include/order.h
     src/include/orderitems.h
+    src/include/commonincludes.h
+    src/include/showorder.h
+    src/include/Ceasor.h
 )

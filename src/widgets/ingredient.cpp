@@ -13,7 +13,7 @@ Ingredient::~Ingredient()
     delete ui;
 }
 
-void Ingredient::setData(const QString &input_ingredients, int input_item_id) {
+void Ingredient::writeData(const QString &input_ingredients, int input_item_id) {
     QSqlQuery q;
     QStringList ingredientsList = input_ingredients.split(", ");
     for (const QString &ingredient : ingredientsList) {
@@ -28,6 +28,8 @@ void Ingredient::setData(const QString &input_ingredients, int input_item_id) {
             if (!q.exec()) qDebug() << "Failed to insert into Ingredients table: " << q.lastError().text();
         }
     }
+    all_ingredients = input_ingredients;
+    item_id = input_item_id;
 }
 
 void Ingredient::updateIngredient(const QString &input_ingredients, int input_item_id) {

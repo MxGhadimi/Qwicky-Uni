@@ -153,11 +153,17 @@ void Addorder::on_Continueorder_PB_clicked() {
 
     if (q.exec()) {
         if (q.next()) customer_id = q.value(0).toInt();
-        else QMessageBox::critical(this, "UserInfo", "no user with this information was found!");
+        else {
+            QMessageBox::critical(this, "UserInfo", "no user with this information was found!");
+            return;
+        }
     }
     else qDebug() << "Query execution failed: " << q.lastError().text();
 
-    if ("Dine In" == order_type && ui->Table_LE->text().isEmpty()) QMessageBox::critical(this, "Table", "Please Choose a Table!");
+    if ("Dine In" == order_type && ui->Table_LE->text().isEmpty()) {
+        QMessageBox::critical(this, "Table", "Please Choose a Table!");
+        return;
+    }
 
     else {
         ui->stackedWidget->setCurrentWidget(ui->Items_QW);
@@ -195,7 +201,7 @@ void Addorder::showItems() {
     }
 }
 
-void Addorder::on_deleteamount_PB_clicked() {
+void Addorder::on_Back_PB_clicked() {
     ui->stackedWidget->setCurrentWidget(ui->Neworder_QW);
 }
 
@@ -217,8 +223,8 @@ void Addorder::on_Search_LE_2_textChanged(const QString &arg1) {
         Item *item = new Item(this);
         item->readData(item_id);
         item->showData();
-        if (itemAmounts.contains(item_id)) item->setAmountText(QString::number(itemAmounts[item_id]));
-        else item->setAmountText("0");
+        if (itemAmounts.contains(item_id)) item->setAmountText(itemAmounts[item_id]);
+        else item->setAmountText(0);
         item->showAmount();
         item->setMinimumSize(250, 290);
         item->setMaximumSize(250, 290);
@@ -271,9 +277,7 @@ void Addorder::on_Additems_PB_clicked() {
     for (auto i = selectedItems.begin(); i != selectedItems.end(); i++) {
         selected_items_str += QString::number(i.key()) + " - " + QString::number(i.value()->getAmount()) + ", ";
     }
-    if (!selected_items_str.isEmpty()) {
-        selected_items_str.chop(2);
-    }
+    if (!selected_items_str.isEmpty()) selected_items_str.chop(2);
 
     QDate date = ui->dateEdit->date();
     QString date_str = date.toString("yyyy-MM-dd");

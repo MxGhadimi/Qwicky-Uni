@@ -1,6 +1,5 @@
 #include "admindashboard.h"
 #include "ui_admindashboard.h"
-#include "order.h"
 
 AdminDashboard::AdminDashboard(QWidget *parent)
     : QMainWindow(parent)
@@ -209,8 +208,9 @@ void AdminDashboard::showOrders() {
     QSqlQuery q(QSqlDatabase::database("admin-items"));
     q.prepare("SELECT order_id FROM Orders");
     if (q.exec()) {
+        q.last();
         int row = 0, column = 0;
-        while(q.next()) {
+        do {
             int order_id = q.value("order_id").toInt();
             Order *order = new Order(this);
             order->readData(order_id);
@@ -223,7 +223,7 @@ void AdminDashboard::showOrders() {
                 column = 0;
                 row++;
             }
-        }
+        } while(q.previous());
     }
     else qDebug() << "Error executing query (AdminDashboard showOrders)";
 

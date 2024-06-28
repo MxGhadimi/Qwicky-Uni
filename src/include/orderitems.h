@@ -2,17 +2,7 @@
 #define ORDERITEMS_H
 
 #include <QWidget>
-#include <QFile>
-#include <QDir>
-#include <QtUiTools/QUiLoader>
-#include <QMessageBox>
-#include "QSqlDriver"
-#include "QSqlQuery"
-#include "QSqlQueryModel"
-#include <QSqlError>
-#include <QCheckBox>
-#include <QMainWindow>
-#include <QFileDialog>
+#include "commonincludes.h"
 
 namespace Ui {
 class OrderItems;
@@ -25,10 +15,13 @@ class OrderItems : public QWidget
 public:
     explicit OrderItems(QWidget *parent = nullptr);
     ~OrderItems();
-    void writeData();
     void readData(int input_orderitem_id);
+    void showTMPData(int input_amount, int input_item_id);
     void showData();
-    double getPrice();
+    double getTotalPrice();
+    void updateAmount(int amount);
+    int getAmount();
+    double readPrice();
 
 private:
     Ui::OrderItems *ui;
@@ -36,6 +29,7 @@ private:
     int item_id;
     int amount;
     double total_price;
+    double price;
 };
 
 #endif // ORDERITEMS_H
