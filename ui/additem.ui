@@ -1144,7 +1144,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1179,7 +1179,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1231,7 +1231,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1269,7 +1269,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1304,7 +1304,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1339,10 +1339,9 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
-}
-</string>
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -1374,7 +1373,7 @@ QCheckBox::indicator:unchecked {
 
 QCheckBox::indicator:checked {
 	border: none;;
-	background-color:  rgb(6, 106, 110);
+	background-color:  hsla(187, 52%, 22%, 0.75);
 	border-radius: 8px;
 }
 </string>
@@ -1469,6 +1468,36 @@ QComboBox QAbstractItemView::item:selected {
     <item>
      <property name="text">
       <string>Food</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sides</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shares and snacks</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Traditional Sandwiches</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Combos</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Salads</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Dessert</string>
      </property>
     </item>
     <item>

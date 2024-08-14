@@ -10,8 +10,14 @@ Showitem::Showitem(QWidget *parent)
     setStyleSheet("QMainWindow { background-color: white; }");
     setFixedSize(540, 310);
     connect(ui->Amount_LE, &QLineEdit::returnPressed, this, &Showitem::on_AmountEnter);
+
     ui->Ingredient_LE->setPlaceholderText("Ingredient");
     ui->Amount_LE->setPlaceholderText("Amount");
+    ui->Name_TE->setReadOnly(true);
+    ui->Description_TE->setReadOnly(true);
+    ui->Price_TE->setReadOnly(true);
+    ui->Category_C->setEnabled(false);
+    ui->Ingredients_TE->setReadOnly(true);
 }
 
 Showitem::~Showitem()
@@ -19,34 +25,18 @@ Showitem::~Showitem()
     delete ui;
 }
 
-void Showitem::writeData(int input_item_id) {
-    QSqlQuery q;
-    q.prepare("SELECT * FROM Items WHERE item_id = :item_id");
-    q.bindValue(":item_id", input_item_id);
-    if (!q.exec()) qDebug() << "Error executing query (setData1): " << q.lastError().text();
-
-    if (q.next()) {
-        image = q.value("image").toByteArray();
-        image_data = image;
-        name = q.value("name").toString();
-        setWindowTitle(name);
-        description = q.value("description").toString();
-        price = "$" + q.value("price").toString();
-        days = q.value("days").toString();
-        category = q.value("category").toString();
-        int index = ui->Category_C->findText(category);
+void Showitem::showData(int input_item_id) {
+    item_id = input_item_id;
+    if (item.readData(item_id)) {
+        int index = ui->Category_C->findText(item.getCategory());
         if (index != -1) ui->Category_C->setCurrentIndex(index);
-        else qDebug() << "Category not found in Category_C: " << category;
-        ui->Name_TE->setReadOnly(true);
-        ui->Description_TE->setReadOnly(true);
-        ui->Price_TE->setReadOnly(true);
-        ui->Category_C->setEnabled(false);
+        else qDebug() << "Category not found in Category_C: " << item.getCategory();
 
-        ui->Name_TE->setText(name);
-        ui->Price_TE->setText(price);
-        ui->Description_TE->setText(description);
+        ui->Name_TE->setText(item.getName());
+        ui->Price_TE->setText("$" + item.getPrice());
+        ui->Description_TE->setText(item.getDescription());
         QImage img;
-        img.loadFromData(image);
+        img.loadFromData(item.getImage());
         ui->Image_L->setPixmap(QPixmap::fromImage(img));
         ui->Image_L->setScaledContents(true);
         ui->Editimage_PB->hide();
@@ -54,6 +44,7 @@ void Showitem::writeData(int input_item_id) {
         ui->Amount_LE->hide();
         ui->deleteamount_PB->hide();
 
+        QString days = item.getDays();
         QStringList daysList = days.split(" ");
         QCheckBox *checkBoxes[] = {ui->Monday_CB, ui->Tuesday_CB, ui->Wednesday_CB, ui->Thursday_CB, ui->Friday_CB, ui->Saturday_CB, ui->Sunday_CB};
         QString daysOfWeek[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -63,24 +54,11 @@ void Showitem::writeData(int input_item_id) {
             }
             checkBoxes[i]->setDisabled(true);
         }
+        if (ingredient.readData(item_id)) {
+            ui->Ingredients_TE->setText(ingredient.getAllIngredients());
+            all_ingredients = ingredient.getAllIngredients();
+        }
     }
-    else qDebug() << "No rows found in the table" << input_item_id;
-
-    q.prepare("SELECT * FROM Ingredients WHERE item_id = :item_id");
-    q.bindValue(":item_id", input_item_id);
-    if (!q.exec()) qDebug() << "Error executing query(setData2): " << q.lastError().text();
-
-    while (q.next()) {
-        QString ingredient = q.value("ingredient_name").toString();
-        QString amount = q.value("amount").toString();
-        if (!all_ingredients.isEmpty()) all_ingredients += ", " + ingredient + " - " + amount;
-        else all_ingredients = ingredient + " - " + amount;
-    }
-
-    ui->Ingredients_TE->setReadOnly(true);
-    ui->Ingredients_TE->setText(all_ingredients);
-    item_id = input_item_id;
-    show();
 }
 
 void Showitem::on_Edit_PB_clicked() {
@@ -106,7 +84,6 @@ void Showitem::on_Edit_PB_clicked() {
     }
 
     else {
-        all_ingredients.clear();
         emit updatedItem();
         edit_mode_on = false;
         QString new_days;
@@ -120,23 +97,37 @@ void Showitem::on_Edit_PB_clicked() {
 
         QString new_price = ui->Price_TE->toPlainText();
         if (new_price.startsWith("$")) new_price = new_price.mid(1);
-        Item *item = new Item(this);
-        Ingredient *ingredient = new Ingredient(this);
-        if (new_days != days)                                       item->updateDays(new_days, item_id);
-        if (ui->Name_TE->toPlainText() != name)                     item->updateName(ui->Name_TE->toPlainText(), item_id);
-        if (new_price != price)                                     item->updatePrice(new_price, item_id);
-        if (ui->Category_C->currentText() != category)              item->updateCategory(ui->Category_C->currentText(), item_id);
-        if (ui->Description_TE->toPlainText() != description)       item->updateDescription(ui->Description_TE->toPlainText(), item_id);
-        if (ui->Ingredients_TE->toPlainText() != all_ingredients)   ingredient->updateIngredient(ui->Ingredients_TE->toPlainText(), item_id);
 
-        ui->Edit_PB->setText("Edit");
-        ui->Editimage_PB->hide();
-        ui->Amount_LE->hide();
-        ui->deleteamount_PB->hide();
-        ui->Ingredient_LE->hide();
-        ui->Ingredients_TE->setStyleSheet("QTextEdit { color: rgb(31, 48, 58); background: rgb(255, 255, 255); border: none; } QScrollBar:vertical { background: rgb(255, 255, 255); width: 3px; border-radius: 2px; } QScrollBar::handle:vertical { background: rgb(255, 137, 64); min-height: 3px; border-radius: 2px; } QScrollBar::add-line:vertical { background: rgb(255, 255, 255); } QScrollBar::sub-line:vertical { background: rgb(255, 255, 255); } QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: rgb(255, 255, 255); } QMenu { border: 1px solid white; border-radius: 5px; background-color: rgb(6, 106, 110); padding: 7px; color: white; } QMenu::item { padding: 4px; } QMenu::item:hover { border: none; outline: none; } QMenu::item:selected { background-color: rgb(255, 137, 64); border-radius: 5px; color: rgb(31, 48, 58); } QMenu::separator { height: 1px; background-color: white; }");
-        writeData(item_id);
-        QMessageBox::information(this, "Update Item", "Updated!");
+        bool updated = true;
+        if (new_days != item.getDays()) {
+            if (!item.updateDays(new_days, item_id)) updated = false;
+        }
+        if (ui->Name_TE->toPlainText() != item.getName()) {
+            if (!item.updateName(ui->Name_TE->toPlainText(), item_id)) updated = false;
+        }
+        if (new_price != item.getPrice()) {
+            if (!item.updatePrice(new_price, item_id)) updated = false;
+        }
+        if (ui->Category_C->currentText() != item.getCategory()) {
+            if (!item.updateCategory(ui->Category_C->currentText(), item_id)) updated = false;
+        }
+        if (ui->Description_TE->toPlainText() != item.getDescription()) {
+            if (!item.updateDescription(ui->Description_TE->toPlainText(), item_id)) updated = false;
+        }
+        if (ui->Ingredients_TE->toPlainText() != ingredient.getAllIngredients()) {
+            if (!ingredient.updateIngredient(ui->Ingredients_TE->toPlainText(), item_id)) updated = false;
+        }
+
+        if (updated) {
+            ui->Edit_PB->setText("Edit");
+            ui->Editimage_PB->hide();
+            ui->Amount_LE->hide();
+            ui->deleteamount_PB->hide();
+            ui->Ingredient_LE->hide();
+            ui->Ingredients_TE->setStyleSheet("QTextEdit { color: rgb(31, 48, 58); background: rgb(255, 255, 255); border: none; } QScrollBar:vertical { background: rgb(255, 255, 255); width: 3px; border-radius: 2px; } QScrollBar::handle:vertical { background: rgb(255, 137, 64); min-height: 3px; border-radius: 2px; } QScrollBar::add-line:vertical { background: rgb(255, 255, 255); } QScrollBar::sub-line:vertical { background: rgb(255, 255, 255); } QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: rgb(255, 255, 255); } QMenu { border: 1px solid white; border-radius: 5px; background-color: rgb(6, 106, 110); padding: 7px; color: white; } QMenu::item { padding: 4px; } QMenu::item:hover { border: none; outline: none; } QMenu::item:selected { background-color: rgb(255, 137, 64); border-radius: 5px; color: rgb(31, 48, 58); } QMenu::separator { height: 1px; background-color: white; }");
+            showData(item_id);
+            QMessageBox::information(this, "Update Item", "Updated!");
+        }
     }
 }
 
@@ -151,6 +142,7 @@ void Showitem::on_AmountEnter() {
         else {
             all_ingredients += ", " + ingredient + " - " + amount;
         }
+        ui->Ingredients_TE->clear();
         ui->Ingredients_TE->setText(all_ingredients);
         ui->Ingredient_LE->clear();
         ui->Amount_LE->clear();
@@ -182,18 +174,9 @@ void Showitem::on_Editimage_PB_clicked() {
 }
 
 void Showitem::on_Delete_PB_clicked() {
-    QSqlQuery q;
-    q.prepare("DELETE FROM Items WHERE item_id = :item_id");
-    q.bindValue(":item_id", item_id);
-    if (q.exec()){
-        q.prepare("DELETE FROM Ingredients WHERE item_id = :item_id");
-        q.bindValue(":item_id", item_id);
-        if (q.exec()) {
-            QMessageBox::information(this, "Delete item", "Deleted!");
-            emit updatedItem();
-            close();
-        }
-        else qDebug() << "Failed to delete ingredients: " << q.lastError().text();
+    if (item.deleteItem(item_id)) {
+        QMessageBox::information(this, "Delete item", "Deleted!");
+        emit updatedItem();
+        close();
     }
-    else qDebug() << "Failed to delete item: " << q.lastError().text();
 }

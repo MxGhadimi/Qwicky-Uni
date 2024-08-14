@@ -1,6 +1,5 @@
 #include "showcustomer.h"
 #include "ui_showcustomer.h"
-#include "customer.h"
 
 Showcustomer::Showcustomer(QWidget *parent)
     : QWidget(parent)
@@ -42,35 +41,19 @@ void Showcustomer::addCustomer() {
     ui->Edit_PB->hide();
 }
 
-
 void Showcustomer::showData(int input_customer_id) {
-    customer_id = input_customer_id;
-    QSqlQuery q(QSqlDatabase::database("customer"));
-    q.prepare("SELECT * FROM Customers WHERE id = :id");
-    q.bindValue(":id", customer_id);
-    if (!q.exec()) qDebug() << "Error executing query: " << q.lastError().text();
-
-    if (q.next()) {
-        first_name = q.value("first_name").toString();
-        last_name = q.value("last_name").toString();
-        phone_number = q.value("phone_number").toString();
-        address = q.value("address").toString();
-        credit = q.value("credit").toDouble();
-        debt = q.value("debt").toDouble();
-        username = q.value("username").toString();
-        password = q.value("password").toString();
-
-        ui->Username_LE->setText(username);
-        ui->Name_LE->setText(first_name);
-        ui->Lastname_LE->setText(last_name);
-        ui->Phonenumber_LE->setText(phone_number);
-        ui->Address_LE->setText(address);
-        ui->Credit_LE->setText(QString::number(credit));
-        ui->Debt_LE->setText(QString::number(debt));
-        ui->Customerid_L->setText(QString::number(customer_id));
+    if (customer.readData(input_customer_id)) {
+        customer_id = input_customer_id;
+        ui->Username_LE->setText(customer.getUsername());
+        ui->Name_LE->setText(customer.getFirstName());
+        ui->Lastname_LE->setText(customer.getLastName());
+        ui->Phonenumber_LE->setText(customer.getPhoneNumber());
+        ui->Address_LE->setText(customer.getAddress());
+        ui->Credit_LE->setText(QString::number(customer.getCredit()));
+        ui->Debt_LE->setText(QString::number(customer.getDebt()));
+        ui->Customerid_L->setText("#" + QString::number(customer_id));
+        show();
     }
-    else qDebug() << "No rows found in the table";
-    show();
 }
 
 void Showcustomer::on_Edit_PB_clicked() {
@@ -99,34 +82,44 @@ void Showcustomer::on_Edit_PB_clicked() {
         ui->Customerid_L->setEnabled(false);
         edit_mode_on = false;
 
-        Customer *customer = new Customer(this);
-        if (username != ui->Username_LE->text()) customer->updateUsername(ui->Username_LE->text(), customer_id);
-        if (first_name != ui->Name_LE->text()) customer->updateFirstName(ui->Name_LE->text(), customer_id);
-        if (last_name != ui->Lastname_LE->text()) customer->updateLastName(ui->Lastname_LE->text(), customer_id);
-        if (phone_number != ui->Phonenumber_LE->text()) customer->updatePhoneNumber(ui->Phonenumber_LE->text(), customer_id);
-        if (address != ui->Address_LE->text()) customer->updateAddress(ui->Address_LE->text(), customer_id);
-        if (credit != ui->Credit_LE->text().toDouble()) customer->updateCredit(ui->Credit_LE->text().toDouble(), customer_id);
-        if (debt != ui->Debt_LE->text().toDouble()) customer->updateDebt(ui->Debt_LE->text().toDouble(), customer_id);
-        QMessageBox::information(nullptr, "Update Customer", "Updated!");
+        bool updated = true;
+        if (customer.getUsername() != ui->Username_LE->text()) {
+            if (!customer.updateUsername(ui->Username_LE->text(), customer_id)) updated = false;
+        }
+        if (customer.getFirstName() != ui->Name_LE->text()) {
+            if (!customer.updateFirstName(ui->Name_LE->text(), customer_id)) updated = false;
+        }
+        if (customer.getLastName() != ui->Lastname_LE->text()) {
+            if (!customer.updateLastName(ui->Lastname_LE->text(), customer_id)) updated = false;
+        }
+        if (customer.getPhoneNumber() != ui->Phonenumber_LE->text()) {
+            if (!customer.updatePhoneNumber(ui->Phonenumber_LE->text(), customer_id)) updated = false;
+        }
+        if (customer.getAddress() != ui->Address_LE->text()) {
+            if (!customer.updateAddress(ui->Address_LE->text(), customer_id)) updated = false;
+        }
+        if (customer.getCredit() != ui->Credit_LE->text().toDouble()) {
+            if (!customer.updateCredit(ui->Credit_LE->text().toDouble(), customer_id)) updated = false;
+        }
+        if (customer.getDebt() != ui->Debt_LE->text().toDouble()) {
+            if (!customer.updateDebt(ui->Debt_LE->text().toDouble(), customer_id)) updated = false;
+        }
+        if (updated) QMessageBox::information(nullptr, "Update Customer", "Updated!");
     }
 }
 
+void Showcustomer::on_Add_PB_clicked() {
+    if (customer.writeData(ui->Name_LE->text(), ui->Lastname_LE->text(), ui->Phonenumber_LE->text(), ui->Address_LE->text(), ui->Credit_LE->text().toDouble(), ui->Debt_LE->text().toDouble(), ui->Username_LE->text(), ui->Password_LE->text())) {
+        QMessageBox::information(nullptr, "Add Customer", "Added!");
+    }
+    else qDebug() << "Failed to add Customer (on_Delete_PB_clicked)";
+}
 
 void Showcustomer::on_Delete_PB_clicked() {
-    QSqlQuery q(QSqlDatabase::database("customer"));
-    q.prepare("DELETE FROM Customers WHERE id = :id");
-    q.bindValue(":id", customer_id);
-    if (!q.exec()) qDebug() << "Failed to delete customer: " << q.lastError().text();
-    else {
-        qDebug() << "Customer deleted successfully";
+    if (customer.deleteCustomer(customer_id)) {
         QMessageBox::information(nullptr, "Delete Customer", "Deleted!");
         close();
     }
-}
-
-
-void Showcustomer::on_Add_PB_clicked() {
-    Customer *customer = new Customer(this);
-    customer->writeData(ui->Name_LE->text(), ui->Lastname_LE->text(), ui->Phonenumber_LE->text(), ui->Address_LE->text(), ui->Credit_LE->text().toDouble(), ui->Debt_LE->text().toDouble(), ui->Username_LE->text(), ui->Password_LE->text());
+    else qDebug() << "Failed to delete Customer (on_Delete_PB_clicked)";
 }
 

@@ -134,17 +134,18 @@ border-radius: 8px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(31, 48, 58);
+     <string notr="true">color: rgb(6, 106, 110);
 font: 600 14pt &quot;Segoe UI&quot;;
 border: none;
 padding-bottom: 3px;
-text-align: left;</string>
+text-align: left;
+</string>
     </property>
     <property name="text">
      <string>Total</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="Orderid_PB">
@@ -170,7 +171,7 @@ text-align: left;</string>
    <widget class="QTimeEdit" name="timeEdit">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>60</y>
       <width>70</width>
       <height>25</height>
@@ -185,13 +186,13 @@ border: none;
 </string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
     </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
     <property name="buttonSymbols">
-     <enum>QAbstractSpinBox::NoButtons</enum>
+     <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
     </property>
     <property name="keyboardTracking">
      <bool>true</bool>
@@ -230,6 +231,76 @@ border: none;
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QScrollArea" name="scrollArea">
+       <property name="styleSheet">
+        <string notr="true">QScrollArea {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+QScrollArea &gt; QWidget &gt; QWidget {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar:vertical {
+    background: rgb(223, 229, 229); 
+    width: 4px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::handle:vertical {
+    background:  rgb(255, 137, 64);
+    min-height: 3px;
+    border-radius: 2px;
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::add-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::sub-line:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::add-page:vertical, QScrollArea &gt; QWidget &gt; QScrollBar::sub-page:vertical {
+    background: rgb(223, 229, 229);
+}
+
+QScrollArea &gt; QWidget &gt; QScrollBar::horizontal {
+    background: rgb(223, 229, 229); 
+    height: 0px;
+}
+
+QMenu {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(6, 106, 110);
+    padding: 7px;
+    color: white;
+}
+
+QMenu::item {
+    padding: 4px;
+}
+
+QMenu::item:hover {
+    border: none;
+    outline: none;
+}
+
+QMenu::item:selected {
+    background-color: rgb(255, 137, 64);
+    border-radius: 5px;
+    color: rgb(31, 48, 58);
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: white;
+}</string>
+       </property>
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
@@ -261,13 +332,13 @@ border: none;
 font: 600 10pt &quot;Segoe UI&quot;;
 border: none;
 padding-bottom: 3px;
-text-align: left;</string>
+text-align: right;</string>
     </property>
     <property name="text">
      <string>order stat</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="Total_L">
@@ -308,7 +379,7 @@ text-align: left;</string>
      <string>Price</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
     </property>
    </widget>
    <widget class="Line" name="line">
@@ -417,7 +488,7 @@ text-align: left;</string>
     border: none;</string>
     </property>
     <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+     <enum>Qt::Orientation::Horizontal</enum>
     </property>
    </widget>
    <widget class="QLabel" name="Order_L">
@@ -484,13 +555,13 @@ text-align: left;</string>
      <bool>false</bool>
     </property>
     <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
     </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
     <property name="buttonSymbols">
-     <enum>QAbstractSpinBox::NoButtons</enum>
+     <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
     </property>
     <property name="accelerated">
      <bool>false</bool>
@@ -521,13 +592,14 @@ text-align: left;</string>
      <string notr="true">background: rgb(6, 106, 110);
 border: none;
 border-radius: 12px;
-font: 700 15pt &quot;Segoe UI&quot;;</string>
+font: 700 15pt &quot;Segoe UI&quot;;
+color: white;</string>
     </property>
     <property name="text">
      <string>A4</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <widget class="QCheckBox" name="Paystatus_CB">
@@ -540,7 +612,7 @@ font: 700 15pt &quot;Segoe UI&quot;;</string>
      </rect>
     </property>
     <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
+     <enum>Qt::LayoutDirection::RightToLeft</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QCheckBox {
@@ -690,9 +762,25 @@ QCheckBox::indicator {
     border: none;</string>
     </property>
     <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+     <enum>Qt::Orientation::Horizontal</enum>
     </property>
    </widget>
+   <zorder>Total_L_2</zorder>
+   <zorder>Orderid_PB</zorder>
+   <zorder>timeEdit</zorder>
+   <zorder>Qty_L</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>Orderstatus_L</zorder>
+   <zorder>Total_L</zorder>
+   <zorder>Price_L</zorder>
+   <zorder>line</zorder>
+   <zorder>Order_L</zorder>
+   <zorder>Customerinfo_PB</zorder>
+   <zorder>dateEdit</zorder>
+   <zorder>Paystatus_CB</zorder>
+   <zorder>Items_L</zorder>
+   <zorder>line_2</zorder>
+   <zorder>Table_L</zorder>
   </widget>
  </widget>
  <resources/>

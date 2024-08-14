@@ -70,7 +70,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">	background: white;
-	color: rgb(31, 48, 58);
+color: hsla(220, 29%, 21%, 1);
 	font: 600 10pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
@@ -88,7 +88,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">	background: white;
-	color: rgb(31, 48, 58);
+color: hsla(220, 29%, 21%, 1);
 	font: 600 10pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
@@ -109,9 +109,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">	background: white;
-	color: rgb(31, 48, 58);
-	font: 600 10pt &quot;Segoe UI&quot;;
-padding-left: 4px;</string>
+color: hsla(220, 29%, 21%, 1);
+	font: 600 10pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>Qty</string>

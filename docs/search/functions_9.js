@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['updateaddress_0',['updateAddress',['../class_customer.html#a9718460e5f1a942806249e2ed5cea7e8',1,'Customer']]],
+  ['updateamount_1',['updateAmount',['../class_order_items.html#ad50e3939e2cf9ea7cb118674d544fc71',1,'OrderItems::updateAmount()'],['../class_show_selected.html#aec1d4f163362b825cc6f58c37f3279ed',1,'ShowSelected::updateAmount()']]],
+  ['updatecategory_2',['updateCategory',['../class_item.html#afafaab076ff4721cecb7d146477a8632',1,'Item']]],
+  ['updatecredit_3',['updateCredit',['../class_customer.html#abec4e59dd9e2eacf937d685b319c44af',1,'Customer']]],
+  ['updatedate_4',['updateDate',['../class_admin_dashboard.html#a5117a3b999b36990499c86f99bc41f2b',1,'AdminDashboard::updateDate()'],['../class_order.html#adaa8e24b92729df297685bd3302677a4',1,'Order::updateDate()']]],
+  ['updatedays_5',['updateDays',['../class_item.html#a7d8d0a11ad46013db8283f359d97701e',1,'Item']]],
+  ['updatedebt_6',['updateDebt',['../class_customer.html#a92961e2466274f94dd86e5b1c4a56793',1,'Customer']]],
+  ['updatedescription_7',['updateDescription',['../class_item.html#ae5b1049dc406e06f54204b02711ab1d2',1,'Item']]],
+  ['updateditem_8',['updatedItem',['../class_showitem.html#a122fda65877c5aafb174cf82b033356b',1,'Showitem']]],
+  ['updatefirstname_9',['updateFirstName',['../class_customer.html#aeeb239529a642c1e2e9532ecb4a40030',1,'Customer']]],
+  ['updateingredient_10',['updateIngredient',['../class_ingredient.html#a706161cc343b0f4485f22697fd850128',1,'Ingredient']]],
+  ['updateitemamount_11',['updateItemAmount',['../class_addorder.html#a9b5a253e84886e52c055673f2ac925a6',1,'Addorder::updateItemAmount()'],['../class_showorder.html#a736c44b8d78757a604f2843d081ad4cd',1,'Showorder::updateItemAmount()']]],
+  ['updateitems_12',['updateItems',['../class_order.html#a932ad78a5cbaa8acee801163a6bacebb',1,'Order']]],
+  ['updatelastname_13',['updateLastName',['../class_customer.html#a8be323f035f7dd0d37a7f8018ac423a1',1,'Customer']]],
+  ['updatename_14',['updateName',['../class_item.html#a352ff374f09b7de9826f5f7be521c844',1,'Item']]],
+  ['updateordertype_15',['updateOrderType',['../class_order.html#a63214902d6685d97124421ed8bd786b9',1,'Order']]],
+  ['updatephonenumber_16',['updatePhoneNumber',['../class_customer.html#ae4614b6ffed3399954651b8edaa244f2',1,'Customer']]],
+  ['updateprice_17',['updatePrice',['../class_item.html#aa3cc291cea85da5d4af1bdbd3506f123',1,'Item']]],
+  ['updatetable_18',['updateTable',['../class_order.html#a4fb398fec6f610bb2d9157b2cb0b7856',1,'Order']]],
+  ['updatetime_19',['updateTime',['../class_order.html#aaed5aac85e2a2d95043f79e75edc2aac',1,'Order']]],
+  ['updateusername_20',['updateUsername',['../class_customer.html#a07d95c44e73556e56fd99bb0d68680a6',1,'Customer']]]
+];

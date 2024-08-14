@@ -41,7 +41,7 @@ background: rgb(255, 255, 255);
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(6, 106, 110);
-font: 700 13pt &quot;Segoe UI&quot;;
+font: 700 14pt &quot;Segoe UI&quot;;
 background: none;
 padding-bottom: 3px;</string>
     </property>
@@ -263,7 +263,7 @@ QPushButton::pressed {
      <string>0</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <zorder>treeView</zorder>

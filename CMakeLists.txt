@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.5)
-
 project(Qwicky VERSION 0.1 LANGUAGES CXX)
 
 # Qt settings
@@ -23,23 +22,36 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-qt_add_executable(Qwicky
-    MANUAL_FINALIZATION
+# Add executable
+add_executable(Qwicky WIN32
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
     data/mainresources.qrc
 )
 
+if(WIN32)
+    set_target_properties(Qwicky PROPERTIES WIN32_EXECUTABLE ON)
+endif()
+
+# Link libraries
 target_link_libraries(Qwicky
     PRIVATE
         Qt6::Core
         Qt6::Widgets
         Qt6::UiTools
+        Qt6::Sql
 )
-
-target_link_libraries(Qwicky PRIVATE Qt6::Sql)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Qwicky)
 endif()
 
+# Copy data files to deployment directory
+add_custom_command(TARGET Qwicky POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/data
+    ${CMAKE_CURRENT_BINARY_DIR}/data
+)
+
+# Install data files to deployment directory
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_INSTALL_PREFIX}/data)

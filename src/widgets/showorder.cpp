@@ -44,42 +44,21 @@ Showorder::~Showorder()
 }
 
 void Showorder::showData(int input_order_id) {
-    QSqlQuery q(QSqlDatabase::database("admin-items"));
-    q.prepare("SELECT * FROM Orders WHERE order_id = :order_id");
-    q.bindValue(":order_id", input_order_id);
-    if (q.exec()) {
-        if (q.next()) {
-            order_id = q.value("order_id").toInt();
-            customer_id = q.value("customer_id").toString();
-            table = q.value("table").toString();
-            order_type = q.value("order_type").toString();
-            date = q.value("date").toString();
-            time = q.value("time").toString();
-            pay_status = q.value("pay_status").toString();
-        }
-    }
-    else qDebug() << "Error executing query(Order readData1): " << q.lastError().text();
-
-    QSqlQuery q2(QSqlDatabase::database("admin"));
-    q2.prepare("SELECT first_name, last_name FROM Customers WHERE id = :id");
-    q2.bindValue(":id", customer_id);
-    if (q2.exec()) {
-        if (q2.next()) name = q2.value("first_name").toString() + " " + q2.value("last_name").toString();
-    }
-    else qDebug() << "Error executing query(Order readData2): " << q2.lastError().text();
-
-    ui->Customerinfo_PB->setText(name);
-    ui->Table_PB->setText(table);
-    int index = ui->Orderstatus_C->findText(order_type);
+    order_id = input_order_id;
+    if (order.readData(order_id)) {
+    ui->Customerinfo_PB->setText(order.getName());
+    ui->Table_PB->setText(order.getTable());
+    int index = ui->Orderstatus_C->findText(order.getOrderType());
     if (index != -1) ui->Orderstatus_C->setCurrentIndex(index);
-    else qDebug() << "order_type not found in Orderstatus_C: " << order_type;
-    ui->dateEdit->setDate(QDate::fromString(date, "yyyy-MM-dd"));
-    ui->timeEdit->setTime(QTime::fromString(time));
+    else qDebug() << "order_type not found in Orderstatus_C: " << order.getOrderType();
+    ui->dateEdit->setDate(QDate::fromString(order.getDate(), "yyyy-MM-dd"));
+    ui->timeEdit->setTime(QTime::fromString(order.getTime()));
     ui->Orderid_L->setText("#" + QString::number(order_id));
-    if ("Payed" == pay_status) {
+
+    if ("Payed" == order.getPayStatus()) {
         ui->Paystatus_CB->setChecked(true);
         ui->Paystatus_CB->setStyleSheet("QCheckBox { background: rgb(144, 238, 144); color: rgb(31, 48, 58); border: none; border-radius: 6px; font: 600 10pt 'Segoe UI'; padding-right: 6px; } QCheckBox::indicator { background: transparent; border: none; width: 16px; height: 16px; } QCheckBox::indicator:unchecked { image: url(:/icons/images/icons/timer.png); } QCheckBox::indicator:checked { image: url(:/icons/images/icons/check.png); }");
-        ui->Paystatus_CB->setText(pay_status);
+        ui->Paystatus_CB->setText(order.getPayStatus());
     }
     else {
         ui->Paystatus_CB->setChecked(false);
@@ -89,35 +68,36 @@ void Showorder::showData(int input_order_id) {
 
     total_price = 0;
 
-    QSqlQuery q3(QSqlDatabase::database("admin-items"));
-    q.prepare("SELECT orderitem_id, item_id, amount FROM OrderItems WHERE order_id = :order_id");
+    QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+    QSqlQuery q(item_db);
+    q.prepare("SELECT orderitem_id, item_id FROM OrderItems WHERE order_id = :order_id");
     q.bindValue(":order_id", order_id);
     if (q.exec()) {
         while(q.next()) {
             int orderitem_id = q.value("orderitem_id").toInt();
             int item_id = q.value("item_id").toInt();
-            int amount = q.value("amount").toInt();
             OrderItems *orderitems = new OrderItems(this);
-            orderitems->readData(orderitem_id);
-            orderitems->showData();
-            total_price += orderitems->getTotalPrice();
-            orderitems->setMinimumSize(290, 20);
-            orderitems->setMaximumSize(290, 20);
-            verticalLayout->addWidget(orderitems);
-            selectedItems[item_id] = orderitems;
+            if (orderitems->readData(orderitem_id)) {
+                orderitems->showData();
+                total_price += orderitems->getTotalPrice();
+                verticalLayout->addWidget(orderitems);
+                selectedItems[item_id] = orderitems;
+            }
         }
     }
     else qDebug() << "Error executing query (Order showData)";
     ui->Total_L_2->setText("$" + QString::number(total_price, 'f', 2));
 
     show();
+    }
 }
 
 void Showorder::on_Paystatus_CB_stateChanged(int arg1) {
     if (Qt::Checked == arg1) {
         ui->Paystatus_CB->setStyleSheet("QCheckBox { background: rgb(144, 238, 144); color: rgb(31, 48, 58); border: none; border-radius: 6px; font: 600 10pt 'Segoe UI'; padding-right: 6px; } QCheckBox::indicator { background: transparent; border: none; width: 16px; height: 16px; } QCheckBox::indicator:unchecked { image: url(:/icons/images/icons/timer.png); } QCheckBox::indicator:checked { image: url(:/icons/images/icons/check.png); }");
         ui->Paystatus_CB->setText("Payed");
-        QSqlQuery q(QSqlDatabase::database("admin-items"));
+        QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+        QSqlQuery q(item_db);
         q.prepare("UPDATE Orders SET pay_status = 'Payed' WHERE order_id = :order_id");
         q.bindValue(":order_id", order_id);
         if (!q.exec()) qDebug() << "Failed to execute query (Order Paystatus changed1): " << q.lastError().text();
@@ -125,7 +105,8 @@ void Showorder::on_Paystatus_CB_stateChanged(int arg1) {
     else {
         ui->Paystatus_CB->setStyleSheet("QCheckBox { background: rgb(255, 204, 153); color: rgb(31, 48, 58); border: none; border-radius: 6px; font: 600 10pt 'Segoe UI'; padding-right: 6px; } QCheckBox::indicator { background: transparent; border: none; width: 16px; height: 16px; } QCheckBox::indicator:unchecked { image: url(:/icons/images/icons/timer.png); } QCheckBox::indicator:checked { image: url(:/icons/images/icons/check.png); }");
         ui->Paystatus_CB->setText("Pending");
-        QSqlQuery q(QSqlDatabase::database("admin-items"));
+        QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+        QSqlQuery q(item_db);
         q.prepare("UPDATE Orders SET pay_status = 'Pending' WHERE order_id = :order_id");
         q.bindValue(":order_id", order_id);
         if (!q.exec()) qDebug() << "Failed to execute query (Order Paystatus changed2): " << q.lastError().text();
@@ -164,20 +145,34 @@ void Showorder::on_Edit_PB_clicked() {
         QTime time = ui->timeEdit->time();
         QString time_str = time.toString("HH:mm");
 
-        Order *order = new Order(this);
-        order->updateItems(selected_items_str, order_id);
-        order->updateDate(date_str, order_id);
-        order->updateTime(time_str, order_id);
-        order->updateTable(ui->Table_PB->text(), order_id);
-        order->updateOrderType(ui->Orderstatus_C->currentText(), order_id);
-        QMessageBox::information(nullptr, "Update Order", "Updated!");
+        bool updated = true;
+        if (ui->Table_PB->text() != order.getTable()) {
+            if (!order.updateTable(ui->Table_PB->text(), order_id)) updated = false;
+        }
+        if (ui->Orderstatus_C->currentText() != order.getOrderType()) {
+            if (!order.updateOrderType(ui->Orderstatus_C->currentText(), order_id)) updated = false;
+        }
+        if (date_str != order.getDate()) {
+            if (!order.updateDate(date_str, order_id)) {
+                updated = false;
+            } else {
+                date = QDate::fromString(date_str, "yyyy-MM-dd");
+            }
+        }
+        if (time_str != order.getTime()) {
+            if (!order.updateTime(time_str, order_id)) updated = false;
+        }
+        if (!order.updateItems(selected_items_str, order_id)) updated = false;
+
+        if (updated) QMessageBox::information(nullptr, "Update Order", "Updated!");
         edit_mode_on = false;
     }
 }
 
 void Showorder::showItems() {
     ui->Search_LE->setPlaceholderText("Search for an item...");
-    QSqlQuery q(QSqlDatabase::database("admin-items"));
+    QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+    QSqlQuery q(item_db);
     q.prepare("SELECT * FROM Items");
     if (!q.exec()) qDebug() << "Error executing query";
 
@@ -218,12 +213,11 @@ void Showorder::updateItemAmount(int item_id, int amount) {
     }
     else {
         OrderItems *orderitems = new OrderItems(this);
-        orderitems->showTMPData(amount, item_id);
-        orderitems->showData();
-        orderitems->setMinimumSize(290, 20);
-        orderitems->setMaximumSize(290, 20);
-        verticalLayout->addWidget(orderitems);
-        selectedItems[item_id] = orderitems;
+        if (orderitems->showTMPData(amount, item_id)) {
+            orderitems->showData();
+            verticalLayout->addWidget(orderitems);
+            selectedItems[item_id] = orderitems;
+        }
     }
     total = 0.0;
     for (auto i = selectedItems.begin(); i != selectedItems.end(); i++) {
@@ -240,7 +234,8 @@ void Showorder::on_Search_LE_textChanged(const QString &arg1) {
         delete item;
     }
 
-    QSqlQuery q(QSqlDatabase::database("admin-items"));
+    QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+    QSqlQuery q(item_db);
     q.prepare("SELECT * FROM Items WHERE name LIKE :search OR description LIKE :search");
     q.bindValue(":search", "%" + arg1 + "%");
     if (!q.exec()) qDebug() << "Error executing query";
@@ -270,7 +265,6 @@ void Showorder::on_Search_LE_textChanged(const QString &arg1) {
     }
 }
 
-
 void Showorder::on_back_PB_clicked() {
     ui->stackedWidget->setCurrentWidget(ui->Orderinfo_QW);
     setFixedSize(1124, 650);
@@ -282,7 +276,8 @@ void Showorder::on_back_PB_clicked() {
 void Showorder::on_Table_PB_clicked() {
     setFixedSize(311, 438);
     ui->stackedWidget->setCurrentWidget(ui->Table_QW);
-    QSqlQuery q(QSqlDatabase::database("admin-items"));
+    QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+    QSqlQuery q(item_db);
     QDate date = ui->dateEdit->date();
     QString date_str = date.toString("yyyy-MM-dd");
     QTime time = ui->timeEdit->time();
@@ -293,10 +288,10 @@ void Showorder::on_Table_PB_clicked() {
     q.bindValue(":time", time_str);
     if (!q.exec()) qDebug() << "Error executing query: " << q.lastError().text();
 
-    QLayoutItem* item;
-    while ((item = gridLayout->takeAt(0))) {
-        delete item->widget();
-        delete item;
+    QLayoutItem* litem;
+    while ((litem = gridLayout->takeAt(0))) {
+        delete litem->widget();
+        delete litem;
     }
 
     int row = 0, column = 0;
@@ -318,12 +313,15 @@ void Showorder::on_Table_PB_clicked() {
         connect(table_pb, &QPushButton::clicked, this, [this, table_name]() {
             ui->Table_PB->setText(table_name);
             ui->stackedWidget->setCurrentWidget(ui->Orderinfo_QW);
+            setFixedSize(1124, 650);
+            showItems();
         });
     }
 }
 
 void Showorder::on_Delete_PB_clicked() {
-    QSqlQuery q(QSqlDatabase::database("admin-items"));
+    QSqlDatabase item_db = DatabaseManager::getInstance().getItemsDatabase();
+    QSqlQuery q(item_db);
     q.prepare("DELETE FROM Tabletime WHERE order_id = :order_id");
     q.bindValue(":order_id", order_id);
     if (q.exec()) {
@@ -341,5 +339,11 @@ void Showorder::on_Delete_PB_clicked() {
         else qDebug() << "Failed to delete from OrderItems (Order deleteOrder2): " << q.lastError().text();
     }
     else  qDebug() << "Failed to delete from Tabletime (Order deleteOrder1): " << q.lastError().text();
+}
+
+void Showorder::on_Customerinfo_PB_clicked() {
+    Showcustomer *showcustomer = new Showcustomer(nullptr);
+    showcustomer->showData(order.getCustomerID());
+    showcustomer->show();
 }
 

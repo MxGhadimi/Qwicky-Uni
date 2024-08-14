@@ -6,17 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setWindowTitle("Qwicky");
-    QIcon icon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/iconqwicky.png");
+    QIcon icon(QCoreApplication::applicationDirPath() + QDir::separator() + "data/images/icons/iconqwicky.png");
     QApplication::setWindowIcon(icon);
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", "Admin");
-    QString dbpath = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/admin.db";
-    database.setDatabaseName(dbpath);
-    if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
-
-    QSqlDatabase database2 = QSqlDatabase::addDatabase("QSQLITE", "Items");
-    QString dbpath2 = QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/items.db";
-    database.setDatabaseName(dbpath2);
-    if (!database.open()) qDebug() << "Failed to open database" << database.lastError().text();
 
     ui->Password_LE->setEchoMode(QLineEdit::Password);
 
@@ -34,7 +25,7 @@ MainWindow::~MainWindow() {
 //================ LogIn WIDGET ================//
 
 void MainWindow::checkLoginFile() {
-    file.setFileName(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/usersdata/login.txt");
+    file.setFileName(QCoreApplication::applicationDirPath() + QDir::separator() + "data/usersdata/login.txt");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream in(&file);
         int key = in.readLine().toInt();
@@ -51,13 +42,15 @@ void MainWindow::checkLoginFile() {
             emit showCustomerDashboardPage();
         }
     }
+    file.close();
 }
 
 void MainWindow::on_Login_PB_clicked() {
     QString username = ui->Username_LE->text();
     QString password = ui->Password_LE->text();
 
-    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
+    QSqlDatabase admin_db = DatabaseManager::getInstance().getAdminDatabase();
+    QSqlQuery q(admin_db);
     QString query = "SELECT 'admin' as user_type FROM Admins WHERE username = :username AND password = :password UNION SELECT 'customer' as user_type FROM Customers WHERE username = :username AND password = :password";
     if (!q.prepare(query)) qDebug() << "Error preparing query: " << q.lastError().text();
     q.bindValue(":username", username);
@@ -108,11 +101,11 @@ void MainWindow::on_SignUp_PB_clicked() {
 void MainWindow::on_ShowPass_PB_clicked() {
     if (ui->Password_LE->echoMode() == QLineEdit::Password) {
         ui->Password_LE->setEchoMode(QLineEdit::Normal);
-                ui->ShowPass_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/closedeye.png"));
+                ui->ShowPass_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "data/images/icons/closedeye.png"));
     }
     else {
         ui->Password_LE->setEchoMode(QLineEdit::Password);
-                ui->ShowPass_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/openeye.png"));
+                ui->ShowPass_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "data/images/icons/openeye.png"));
     }
 }
 
@@ -179,7 +172,8 @@ void MainWindow::on_SignUp2_PB_clicked() {
 }
 
 bool MainWindow::insertData(const QString& name, const QString& lastName, const QString& phoneNumber, const QString& address, const QString& username, const QString& password) {
-    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
+    QSqlDatabase admin_db = DatabaseManager::getInstance().getAdminDatabase();
+    QSqlQuery q(admin_db);
     q.prepare("INSERT INTO Customers (first_name, last_name, phone_number, address, username, password) VALUES (:name, :lastname, :phonenumber, :address, :username, :password)");
     q.bindValue(":name", name);
     q.bindValue(":lastname", lastName);
@@ -196,7 +190,8 @@ void MainWindow::on_Login2_PB_clicked() {
     QString username = ui->Username2_LE->text();
     QString password = ui->Password2_LE->text();
 
-    QSqlQuery q(QSqlDatabase::database("Login/Signup"));
+    QSqlDatabase admin_db = DatabaseManager::getInstance().getAdminDatabase();
+    QSqlQuery q(admin_db);
     q.prepare("SELECT 'admin' as user_type FROM Admins WHERE username = :username AND password = :password UNION SELECT 'customer' as user_type FROM Customers WHERE username = :username AND password = :password");
     q.bindValue(":username", username);
     q.bindValue(":password", password);
@@ -219,11 +214,11 @@ void MainWindow::on_Login2_PB_clicked() {
 void MainWindow::on_ShowPass2_PB_clicked() {
     if (ui->Password2_LE->echoMode() == QLineEdit::Password) {
         ui->Password2_LE->setEchoMode(QLineEdit::Normal);
-                ui->ShowPass2_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/closedeye.png"));
+                ui->ShowPass2_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "data/images/icons/closedeye.png"));
     }
     else {
         ui->Password2_LE->setEchoMode(QLineEdit::Password);
-        ui->ShowPass2_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "../../data/images/icons/openeye.png"));
+        ui->ShowPass2_PB->setIcon(QIcon(QCoreApplication::applicationDirPath() + QDir::separator() + "data/images/icons/openeye.png"));
     }
 }
 

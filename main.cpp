@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         QApplication::setFont(font);
     }
 
-    MainWindow mainWindow;
+    MainWindow mainwindow;
     //Signup signup;
     customerdashboard customerdashboard;
     AdminDashboard admindashboard;
@@ -27,15 +27,16 @@ int main(int argc, char *argv[]) {
     Addorder addorder;
 
 
-    //QObject::connect(&mainWindow, &MainWindow::showSignUpPage, &signup, &Signup::show);
-    //QObject::connect(&signup, &Signup::showMainWindowPage, &mainWindow, &MainWindow::show);
-    QObject::connect(&mainWindow, &MainWindow::showCustomerDashboardPage, &customerdashboard, &customerdashboard::show);
-    QObject::connect(&mainWindow, &MainWindow::showAdminDashboardPage, &admindashboard, &AdminDashboard::show);
+    //QObject::connect(&mainwindow, &MainWindow::showSignUpPage, &signup, &Signup::show);
+    //QObject::connect(&signup, &Signup::showMainWindowPage, &mainwindow, &MainWindow::show);
+    QObject::connect(&mainwindow, &MainWindow::showCustomerDashboardPage, &customerdashboard, &customerdashboard::show);
+    QObject::connect(&mainwindow, &MainWindow::showAdminDashboardPage, &admindashboard, &AdminDashboard::show);
     QObject::connect(&admindashboard, &AdminDashboard::showAdditemPage, &additem, &Additem::show);
+    QObject::connect(&admindashboard, &AdminDashboard::showMainWindowPage, &mainwindow, &MainWindow::show);
     QObject::connect(&additem, &Additem::itemInserted, &admindashboard, &AdminDashboard::showMenu);
     QObject::connect(&showitem, &Showitem::updatedItem, &admindashboard, &AdminDashboard::showMenu);
     QObject::connect(&admindashboard, &AdminDashboard::showAddorderPage, &addorder, &Addorder::show);
 
-    mainWindow.show();
+    mainwindow.show();
     return a.exec();
 }

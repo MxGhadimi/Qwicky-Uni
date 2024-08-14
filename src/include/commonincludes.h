@@ -24,5 +24,7 @@
 #include <QRegularExpressionMatch>
 #include <QIcon>
 #include <QTimer>
+#include <QButtonGroup>
+#include "databasemanager.h"
 
 #endif // COMMONINCLUDES_H
