@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="data/images/icons/iconqwicky.png" alt="Qwicky Logo" width="150" height="150">
+  <img src="./data/images/icons/iconqwicky.png" alt="Qwicky Logo" width="150" height="150">
 </p>
 
 # Qwicky-Uni
@@ -11,7 +11,7 @@ Project of Dr. Shamsaee's: Advanced Programming (Sadjad University of Technology
 Qwicky is a comprehensive restaurant management application designed to streamline food ordering and management processes. This project serves as a personal exploration in this field.
 
 <p align="center">
-  <img src="diagrams/d1.png" alt="Qwicky Logo"> 
+  <img src="./diagrams/d1.png" alt="Qwicky UI Preview"> 
 </p>
 
 ### Motivations
@@ -21,11 +21,10 @@ Qwicky is a comprehensive restaurant management application designed to streamli
 - Learn version control and file structure
 - Develop a real-world application that integrates database management with a user-friendly interface
 - Learn about documentation and its importance
-
 ----
 ### Documentation
-- [Documentation](docs/index.html)
-- [UML Diagram](diagrams/qwicky.drawio)
+- [Documentation](https://masaroshi.github.io/Qwicky-Uni/index.html)
+- <a href="diagrams/Qwicky.drawio" download>UML Diagram</a>
 
 ### User Stories
 ### - As a Restaurant Manager, I want to:
