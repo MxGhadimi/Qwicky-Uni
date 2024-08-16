@@ -23,7 +23,7 @@ Qwicky is a comprehensive restaurant management application designed to streamli
 - Learn about documentation and its importance
 ----
 ### Documentation
-- [Documentation](https://masaroshi.github.io/Qwicky-Uni/index.html)
+- [Documentation](https://mxghadimi.github.io/Qwicky-Uni/)
 - <a href="diagrams/Qwicky.drawio" download>UML Diagram</a>
 
 ### User Stories
